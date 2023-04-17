@@ -1,0 +1,43 @@
+{
+  "name": "the-little-things",
+  "version": "1.0.0",
+  "description": "E-commerce (electronic commerce) is the buying and selling of goods and services, or the transmitting of funds or data, over an electronic network, primarily the internet.",
+  "main": "Server.js",
+  "scripts": {
+    "development": "nodemon Server.js",
+    "start": "node Server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inydv/THE-LITTLE-THINGS.git"
+  },
+  "keywords": [
+    "e-commerce",
+    "mern-stack",
+    "shopping-cart",
+    "e-shop",
+    "the-little-things"
+  ],
+  "author": "inydv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/inydv/THE-LITTLE-THINGS/issues"
+  },
+  "homepage": "https://github.com/inydv/THE-LITTLE-THINGS#readme",
+  "dependencies": {
+    "cloudinary": "^1.35.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto-js": "^4.1.1",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.2",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.21",
+    "path": "^0.12.7",
+    "validator": "^13.9.0"
+  }
+}
