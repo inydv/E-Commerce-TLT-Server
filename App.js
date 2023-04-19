@@ -1,8 +1,13 @@
 // IMPORT PACKAGES
-const Express = require("express");
-const CookieParser = require("cookie-parser");
-const Cors = require("cors");
-const BodyParser = require("body-parser");
+const {
+  Express,
+  CookieParser,
+  Cors,
+  BodyParser,
+} = require("./Configs/Packages.Import");
+
+// IMPORT LOCAL REQUIRED FILES
+const { UserAuthenticationRoute } = require("./Routes/index");
 const { Errors } = require("./Helpers/index");
 
 // DOTENV CONFIG
@@ -24,9 +29,6 @@ App.use(
     credentials: true,
   })
 );
-
-// IMPORT LOCAL REQUIRED FILES
-const { UserAuthenticationRoute } = require("./Routes/index");
 
 // USE LOCAL REQUIRED FILES
 App.use("/api/v1/user/authentication", UserAuthenticationRoute);

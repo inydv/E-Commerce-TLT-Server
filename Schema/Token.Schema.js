@@ -1,4 +1,5 @@
-const Mongoose = require("mongoose");
+// IMPORT REQUIRED PACKAGES
+const { Mongoose } = require("../Configs/Packages.Import");
 
 // TOKEN SCHEMA
 const TokenSchema = new Mongoose.Schema({

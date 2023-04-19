@@ -1,3 +1,4 @@
+// IMPORT LOCAL REQUIRED FILES
 const ErrorHandler = require("../Utilities/ErrorHandler");
 
 // PRE-DEFINED AND CUSTOM ERROR
@@ -37,6 +38,7 @@ module.exports = (error, req, res, next) => {
     error = new ErrorHandler(Message, 400);
   }
 
+  // SEND RESPONSE
   res.status(error.StatusCode).json({
     Success: false,
     Message: error.Message,

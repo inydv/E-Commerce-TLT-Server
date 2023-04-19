@@ -1,4 +1,7 @@
-const Mongoose = require("mongoose");
+// IMPORT REQUIRED PACKAGES
+const { Mongoose } = require("../Configs/Packages.Import");
+
+// IMPORT LOCAL REQUIRED FILES
 const { NumberValidation } = require("../Validations/index");
 
 // CART SCHEMA

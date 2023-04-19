@@ -1,8 +1,11 @@
-const mongoose = require("mongoose");
+// IMPORT REQUIRED PACKAGES
+const { Mongoose } = require("../Configs/Packages.Import");
+
+// IMPORT LOCAL REQUIRED FILES
 const { EmailValidation, NumberValidation } = require("../Validations/index");
 
 // ORDER SCHEMA
-const OrderSchema = new mongoose.Schema(
+const OrderSchema = new Mongoose.Schema(
   {
     shippingInformation: {
       firstname: {
@@ -57,7 +60,7 @@ const OrderSchema = new mongoose.Schema(
     orderItems: [
       {
         productId: {
-          type: mongoose.Schema.ObjectId,
+          type: Mongoose.Schema.ObjectId,
           required: [true, "Invalid Product ID"],
         },
         quantity: {
@@ -68,7 +71,7 @@ const OrderSchema = new mongoose.Schema(
     ],
 
     userId: {
-      type: mongoose.Schema.ObjectId,
+      type: Mongoose.Schema.ObjectId,
       ref: "UserSchema",
       required: [true, "Please Enter User ID"],
     },
@@ -133,4 +136,4 @@ OrderSchema.pre(/^find/, function (next) {
   next();
 });
 
-module.exports = mongoose.model("OrderSchema", OrderSchema);
+module.exports = Mongoose.model("OrderSchema", OrderSchema);

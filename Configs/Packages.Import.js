@@ -1,0 +1,35 @@
+// MONGOOSE
+const Mongoose = require("mongoose");
+
+// EXPRESS
+const Express = require("express");
+
+// COOKIE PARSER
+const CookieParser = require("cookie-parser");
+
+// CORS
+const Cors = require("cors");
+
+// BODY PARSER
+const BodyParser = require("body-parser");
+
+// CLOUDINARY
+const Cloudinary = require("cloudinary");
+
+// EXPRESS FILEUPLOAD
+const FileUpload = require("express-fileupload");
+
+// CRYPTO JS
+const CryptoJS = require("crypto-js");
+
+// EXPORT
+module.exports = {
+  Mongoose,
+  Express,
+  CookieParser,
+  Cors,
+  BodyParser,
+  Cloudinary,
+  FileUpload,
+  CryptoJS,
+};

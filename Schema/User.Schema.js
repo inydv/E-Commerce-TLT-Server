@@ -1,5 +1,7 @@
-const Mongoose = require("mongoose");
-const CryptoJS = require("crypto-js");
+// IMPORT REQUIRED PACKAGES
+const { Mongoose, CryptoJS } = require("../Configs/Packages.Import");
+
+// IMPORT LOCAL REQUIRED FILES
 const { EmailValidation, NumberValidation } = require("../Validations/index");
 
 // USER SCHEMA
