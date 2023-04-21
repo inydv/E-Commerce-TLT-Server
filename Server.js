@@ -4,12 +4,13 @@ const { Cloudinary, FileUpload } = require("./Configs/Packages.Import");
 // IMPORT LOCAL REQUIRED FILES
 const App = require("./App");
 const ConnectDatabase = require("./Configs/Database");
+const { SUCCESSFUL, ERROR } = require("./Constants/Messages.Constant");
 
 // HANDLING UNCAUGHT EXCEPTION
 process.on("uncaughtException", (err) => {
   console.log(`Error Name: ${err.name}`);
   console.log(`Error Message: ${err.message}`);
-  console.log("UCAUGHT EXCEPTION!💥 SHUTTING down....");
+  console.log(ERROR.UNCAUGHT_EXCEPTION);
 
   process.exit(1);
 });
@@ -33,14 +34,14 @@ ConnectDatabase();
 // SERVER LISTEN
 const Port = process.env.PORT || 4000;
 const Server = App.listen(Port, () => {
-  console.log(`SERVER IS WORKING ON ${Port}....`);
+  console.log(SUCCESSFUL.SERVER.replace("${PORT}", Port));
 });
 
 // UNHANDLED PROMISE REJECTION OF DATABASE
 process.on("unhandledRejection", (err) => {
   console.log(`Error Name: ${err.name}`);
   console.log(`Error Message: ${err.message}`);
-  console.log("UNHANDLED REJECTION!💥 SHUTTING down....");
+  console.log(ERROR.UNHANDLED_REJECTION);
 
   Server.close(() => {
     process.exit(1);

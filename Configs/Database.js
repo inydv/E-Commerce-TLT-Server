@@ -1,5 +1,6 @@
 // IMPORT REQUIRED PACKAGES
 const { Mongoose } = require("./Packages.Import");
+const { SUCCESSFUL } = require("../Constants/Messages.Constant");
 
 // REPLACE PASSWORD IN MONGO URL
 const DB = process.env.DATABASE.replace(
@@ -15,9 +16,10 @@ const connectDatabase = () => {
     useUnifiedTopology: true,
   })
     .then((data) => {
-      console.log(`MONGODB CONNECTED WITH SERVER: ${data.connection.host}`);
+      console.log(SUCCESSFUL.MONGODB.replace("${CONNECTION_HOST}", data.connection.host));
     })
     .catch((err) => console.log(err));
 };
 
+// EXPORT
 module.exports = connectDatabase;

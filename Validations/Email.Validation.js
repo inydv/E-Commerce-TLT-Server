@@ -21,6 +21,7 @@ function EmailValidation(Email) {
   return true;
 }
 
+// EXPORT
 module.exports = {
   EmailValidation,
 };

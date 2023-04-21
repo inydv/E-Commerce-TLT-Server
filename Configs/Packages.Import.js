@@ -22,6 +22,21 @@ const FileUpload = require("express-fileupload");
 // CRYPTO JS
 const CryptoJS = require("crypto-js");
 
+// MORGAN
+const Morgan = require("morgan");
+
+// WINSTON
+const Winston = require("winston");
+
+// NODEMAILER
+const NodeMailer = require("nodemailer");
+
+// EJS
+const EJS = require("ejs");
+
+// PATH
+const Path = require("path");
+
 // EXPORT
 module.exports = {
   Mongoose,
@@ -32,4 +47,9 @@ module.exports = {
   Cloudinary,
   FileUpload,
   CryptoJS,
+  Morgan,
+  Winston,
+  NodeMailer,
+  EJS,
+  Path,
 };

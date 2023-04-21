@@ -7,4 +7,5 @@ class ErrorHandler extends Error {
   }
 }
 
+// export
 module.exports = ErrorHandler;

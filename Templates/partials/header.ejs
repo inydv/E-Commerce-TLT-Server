@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .body-container {
+            background-color: #F5F7FB;
+            width: 100%;
+            display: flex;
+        }
+
+        .container {
+            margin: 50px 0;
+            width: 100%;
+        }
+
+        .inner-container {
+            background-color: white;
+            width: 40%;
+            padding: 20px;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        @media only screen and (max-width: 800px) {
+            .container {
+                margin: 0;
+            }
+
+            .inner-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body-container">
+        <div class="container">
+            <div class="inner-container">
+                <header>
+                    <div style="border-bottom: 1px solid gray; padding-bottom: 5px">
+                        <a href="#">
+                            <img src="cid:logo" height="30px">
+                        </a>
+                    </div>
+                </header>

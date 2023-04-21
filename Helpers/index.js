@@ -1,9 +1,9 @@
 // IMPORT LOCAL REQUIRED FILES
-const CatchAsyncError = require("./CatchAsyncError");
-const Errors = require("./Errors");
+const Errors = require("./Errors.Helper");
+const Logger = require("./Logger.Helper");
 
 // EXPORT
 module.exports = {
-  CatchAsyncError,
   Errors,
+  Logger,
 };
