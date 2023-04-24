@@ -7,14 +7,14 @@ const { NumberValidation } = require("../Validations/index");
 // CART SCHEMA
 const CartSchema = new Mongoose.Schema(
   {
-    userId: {
+    user: {
       type: Mongoose.Schema.ObjectId,
       ref: "UserSchema",
       required: [true, "Invalid User ID"],
     },
     products: [
       {
-        productId: {
+        product: {
           type: Mongoose.Schema.ObjectId,
           ref: "ProductSchema",
           required: [true, "Invalid Product ID"],
@@ -40,7 +40,7 @@ CartSchema.path("products.quantity").validate(function (Number) {
 CartSchema.pre(/^find/, function (next) {
   this.populate(
     {
-      path: "userId",
+      path: "user",
       select: "username -email",
     },
     {

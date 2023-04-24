@@ -55,7 +55,7 @@ const ProductSchema = new Mongoose.Schema(
     },
     reviews: [
       {
-        userId: {
+        user: {
           type: Mongoose.Schema.ObjectId,
           ref: "UserSchema",
           required: [true, "Invalid User ID"],
@@ -101,7 +101,7 @@ ProductSchema.path("reviews.rating").validate(function (Number) {
 // POPULATE BEFORE FIND METHOD
 ProductSchema.pre(/^find/, function (next) {
   this.populate({
-    path: "reviews.userId",
+    path: "reviews.user",
     select: "username -email",
   });
   next();

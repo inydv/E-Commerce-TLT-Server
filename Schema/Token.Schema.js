@@ -1,5 +1,5 @@
 // IMPORT REQUIRED PACKAGES
-const { Mongoose } = require("../Configs/Packages.Import");
+const { Mongoose, Crypto } = require("../Configs/Packages.Import");
 
 // TOKEN SCHEMA
 const TokenSchema = new Mongoose.Schema({
@@ -15,13 +15,20 @@ const TokenSchema = new Mongoose.Schema({
   },
   token: {
     type: String,
-    required: [true, "Invalid Token"],
   },
   createdAt: {
     type: Date,
     default: Date.now(),
     expires: 86400, // EXPIRES IN 24 HOURS
   },
+});
+
+// GENERATE TOKEN
+TokenSchema.pre("save", function (next) {
+  console.log("hey1")
+  this.token = Crypto.randomBytes(20).toString("hex");
+
+  next();
 });
 
 module.exports = Mongoose.model("TokenModel", TokenSchema);

@@ -1,20 +1,19 @@
-// IMPORT LOCAL REQUIRED FILES
-const { CatchAsyncError, ErrorHandler } = require("../Utilities/index");
-
 // CREATE
-const Create = (Model) => CatchAsyncError(async (req, res, next) => {});
+const Create = (Model, ReqBody) => {
+  return Model.create(ReqBody);
+};
 
 // UPDATE
-const Update = (Model) => CatchAsyncError(async (req, res, next) => {});
+const Update = async (Model, req) => {};
 
 // DELETE
-const Delete = (Model) => CatchAsyncError(async (req, res, next) => {});
+const Delete = async (Model, req) => {};
 
 // GET ALL
-const GetAll = (Model) => CatchAsyncError(async (req, res, next) => {});
+const GetAll = async (Model, req) => {};
 
 // GET BY ID
-const GetById = (Model) => CatchAsyncError(async (req, res, next) => {});
+const GetById = async (Model, req) => {};
 
 // EXPORT
 module.exports = {

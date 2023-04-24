@@ -1,8 +1,10 @@
 // IMPORT REQUIRED PACKAGES
 const { NodeMailer, Path, EJS } = require("../Configs/Packages.Import");
 
-module.exports = async ({ email, link, title, subject }) => {
-  const transporter = NodeMailer.createTransport({
+// EXPORT SEND EMAIL
+module.exports = async ({ Title, Email, Subject_1, Subject_2, Link }) => {
+  // CREATE TRANSPORTER
+  const Transporter = NodeMailer.createTransport({
     host: process.env.EMAIL_HOST,
     service: "gmail",
     port: Number(465),
@@ -13,24 +15,31 @@ module.exports = async ({ email, link, title, subject }) => {
     },
   });
 
-  const templatePath = Path.join(__dirname, "../Views/newjob.ejs");
-  const data = await EJS.renderFile(templatePath, {
-    Title: title,
-    Body: `<a href=${link}>${link}</a>`,
+  // TEMPLATE PATH
+  const TemplatePath = Path.join(__dirname, "../Templates/main.ejs");
+
+  // TEMPLATE
+  const HTML = await EJS.renderFile(TemplatePath, {
+    Subject_1: Subject_1,
+    Subject_2: Subject_2,
+    Link: Link,
   });
 
-  const logoPath = Path.join(__dirname, "../Views/logo.png");
-  await transporter.sendMail({
+  // LOGO PATH
+  // const LogoPath = Path.join(__dirname, "../Views/logo.png");
+
+  // SEND TRANSPORT
+  await Transporter.sendMail({
     from: process.env.EMAIL_FROM,
-    to: email,
-    subject: subject,
-    html: data,
-    attachments: [
-      {
-        filename: "logo.png",
-        path: logoPath,
-        cid: "logo",
-      },
-    ],
+    to: Email,
+    subject: Title,
+    html: HTML,
+    // attachments: [
+    //   {
+    //     filename: "logo.png",
+    //     path: LogoPath,
+    //     cid: "logo",
+    //   },
+    // ],
   });
 };

@@ -4,46 +4,63 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        .body-container {
-            background-color: #F5F7FB;
-            width: 100%;
-            display: flex;
+        .body {
+            margin: 0;
+            padding: 50px;
+            background-color: black;
         }
 
-        .container {
-            margin: 50px 0;
-            width: 100%;
+        .header-h1 {
+            text-decoration: line-through;
+            color: white;
+            text-align: center;
+            font-size: 50px;
+            margin: 0;
+            margin-bottom: 1rem;
         }
 
-        .inner-container {
+        .header-h1-span {
+            color: red;
+        }
+
+        .line {
+            height: 1px;
             background-color: white;
-            width: 40%;
-            padding: 20px;
-            left: 0;
-            right: 0;
-            margin: auto;
         }
 
-        @media only screen and (max-width: 800px) {
-            .container {
-                margin: 0;
-            }
+        .footer-h4 {
+            text-align: center;
+            color: white;
+            margin: 0;
+            margin-top: 1.5rem;
+        }
 
-            .inner-container {
-                width: 100%;
-            }
+        .margin-from-top {
+            margin-top: 0.3rem;
+        }
+
+        .main-p {
+            color: white;
+            font-size: 16px;
+            margin: 1rem 0;
+        }
+
+        .main-btn {
+            background-color: #191919;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            color: white !important;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
         }
     </style>
 </head>
 
-<body>
-    <div class="body-container">
-        <div class="container">
-            <div class="inner-container">
-                <header>
-                    <div style="border-bottom: 1px solid gray; padding-bottom: 5px">
-                        <a href="#">
-                            <img src="cid:logo" height="30px">
-                        </a>
-                    </div>
-                </header>
+<body class="body">
+    <header>
+        <h1 class="header-h1">T<span class="header-h1-span">L</span>T</h1>
+    </header>
+    <div class="line"></div>

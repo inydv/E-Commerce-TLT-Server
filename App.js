@@ -8,8 +8,7 @@ const {
 
 // IMPORT LOCAL REQUIRED FILES
 const { UserAuthenticationRoute } = require("./Routes/index");
-const { Errors } = require("./Helpers/index");
-const { ErrorHandler, SuccessHandler } = require("./Configs/Morgan");
+const { Errors } = require("./Middlewares/index");
 const { CORS } = require("./Constants/Configuration.Constant");
 const { ERROR } = require("./Constants/Messages.Constant");
 const { NOT_FOUND } = require("./Constants/Status.Constant");
@@ -20,10 +19,6 @@ require("dotenv").config({ path: "./Configs/config.env" });
 
 //EXPRESS
 const App = Express();
-
-// MORGAN
-App.use(SuccessHandler);
-App.use(ErrorHandler);
 
 // APP USE JSON FORMAT
 App.use(Express.json());

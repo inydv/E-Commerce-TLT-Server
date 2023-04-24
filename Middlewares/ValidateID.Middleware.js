@@ -3,14 +3,13 @@ const { MongoID } = require("../Validations/index");
 const { ERROR } = require("../Constants/Messages.Constant");
 const { UNPROCESSABLE } = require("../Constants/Status.Constant");
 
-const ValidateID = (ID) =>
-  CatchAsyncError(async (req, res, next) => {
-    if (!MongoID(ID)) {
-      return next(new ErrorHandler(ERROR.WRONG_MONGOID, UNPROCESSABLE));
-    }
+const ValidateID = CatchAsyncError(async (req, res, next) => {
+  if (!MongoID(req.params.id)) {
+    return next(new ErrorHandler(ERROR.WRONG_MONGOID, UNPROCESSABLE));
+  }
 
-    next();
-  });
+  next();
+});
 
 module.exports = {
   ValidateID,

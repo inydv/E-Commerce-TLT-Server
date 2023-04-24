@@ -59,7 +59,7 @@ const OrderSchema = new Mongoose.Schema(
 
     orderItems: [
       {
-        productId: {
+        product: {
           type: Mongoose.Schema.ObjectId,
           required: [true, "Invalid Product ID"],
         },
@@ -70,7 +70,7 @@ const OrderSchema = new Mongoose.Schema(
       },
     ],
 
-    userId: {
+    user: {
       type: Mongoose.Schema.ObjectId,
       ref: "UserSchema",
       required: [true, "Please Enter User ID"],
@@ -126,7 +126,7 @@ OrderSchema.path("orderItems.quantity").validate(function (Number) {
 OrderSchema.pre(/^find/, function (next) {
   this.populate(
     {
-      path: "userId",
+      path: "user",
       select: "username -email",
     },
     {

@@ -5,63 +5,63 @@ const { Mongoose, CryptoJS } = require("../Configs/Packages.Import");
 const { EmailValidation, NumberValidation } = require("../Validations/index");
 
 // USER SCHEMA
-const UserSchema = new Mongoose.Schema(
-  {
-    username: {
+const UserSchema = new Mongoose.Schema({
+  username: {
+    type: String,
+    required: [true, "Please Enter Username"],
+    maxlength: [30, "Name Can't Exceed Characters"],
+    minlength: [4, "Name Should've More Than 4 Characaters"],
+    trim: true,
+  },
+  email: {
+    type: String,
+    required: [true, "Please Enter Email"],
+    unique: [true, "Please Enter Unique Email"],
+    lowercase: true,
+    trim: true,
+  },
+  password: {
+    type: String,
+    required: [true, "Please Enter Password"],
+    minlength: [8, "Password Should've More Than 8 Characaters"],
+    maxlength: [24, "Password Can't Exceed 24 Characaters"],
+    select: false,
+    trim: true,
+  },
+  phone: {
+    type: Number,
+  },
+  avatar: {
+    public_id: {
       type: String,
-      required: [true, "Please Enter Username"],
-      maxlength: [30, "Name Can't Exceed Characters"],
-      minlength: [4, "Name Should've More Than 4 Characaters"],
-      trim: true,
     },
-    email: {
+    url: {
       type: String,
-      required: [true, "Please Enter Email"],
-      unique: [true, "Please Enter Unique Email"],
-      lowercase: true,
-      trim: true,
-    },
-    password: {
-      type: String,
-      required: [true, "Please Enter Password"],
-      minlength: [8, "Password Should've More Than 8 Characaters"],
-      maxlength: [24, "Password Can't Exceed 24 Characaters"],
-      select: false,
-      trim: true,
-    },
-    phone: {
-      type: Number,
-    },
-    avatar: {
-      public_id: {
-        type: String,
-      },
-      url: {
-        type: String,
-      },
-    },
-    gender: {
-      type: String,
-      enum: ["Male", "Female", "Others"],
-    },
-    role: {
-      type: String,
-      enum: ["User", "Admin"],
-      required: [true, "Invalid Role"],
-      select: false,
-      default: "User",
-    },
-    isVerified: {
-      type: Boolean,
-      required: [true, "Invalid Verification"],
-      default: false,
-      select: false,
     },
   },
-  {
-    timestamps: true,
-  }
-);
+  gender: {
+    type: String,
+    enum: ["Male", "Female", "Others"],
+  },
+  role: {
+    type: String,
+    enum: ["User", "Admin"],
+    required: [true, "Invalid Role"],
+    select: false,
+    default: "User",
+  },
+  isVerified: {
+    type: Boolean,
+    required: [true, "Invalid Verification"],
+    default: false,
+    select: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    expires: 86400, // EXPIRES IN 24 HOURS
+  },
+});
 
 // CUSTOM VALIDATION FOR EMAIL
 UserSchema.path("email").validate(function (Email) {

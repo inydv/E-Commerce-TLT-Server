@@ -25,9 +25,6 @@ const CryptoJS = require("crypto-js");
 // MORGAN
 const Morgan = require("morgan");
 
-// WINSTON
-const Winston = require("winston");
-
 // NODEMAILER
 const NodeMailer = require("nodemailer");
 
@@ -36,6 +33,9 @@ const EJS = require("ejs");
 
 // PATH
 const Path = require("path");
+
+// CRYPTO
+const Crypto = require("crypto");
 
 // EXPORT
 module.exports = {
@@ -48,8 +48,8 @@ module.exports = {
   FileUpload,
   CryptoJS,
   Morgan,
-  Winston,
   NodeMailer,
   EJS,
   Path,
+  Crypto,
 };
