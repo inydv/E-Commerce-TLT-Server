@@ -1,3 +1,6 @@
+// AUTHENTICATION
+const AUTHENTICATION = "/api/v1";
+
 // USER BASE URL
 const USER = "/api/v1/user";
 
@@ -6,20 +9,21 @@ const ADMIN = "/api/v1/admin";
 
 // EXPORT ROUTES
 module.exports = {
-  // USER ROUTES
-  USER: {
-    AUTHENTICATION: USER + "/authentication",
-    PRODUCT: USER + "/product",
-    ORDER: USER + "/order",
-    PAYMENT: USER + "/payment",
-    USER: USER + "/user",
+  // BASE URLS
+  BASE_URL: {
+    AUTHENTICATION: AUTHENTICATION,
+    USER: USER,
+    ADMIN: ADMIN,
   },
 
-  // ADMIN ROUTES
-  ADMIN: {
-    AUTHENTICATION: ADMIN + "/authentication",
-    PRODUCT: ADMIN + "/product",
-    ORDER: ADMIN + "/order",
-    USER: ADMIN + "/user",
+  // ROUTES
+  ROUTES: {
+    AUTH: "/authentication",
+    CART: "/cart",
+    CONTACT: "/contact",
+    ORDER: "/order",
+    PAYMENT: "/payment",
+    PRODUCT: "/product",
+    USER: "/user",
   },
 };

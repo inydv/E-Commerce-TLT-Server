@@ -7,12 +7,12 @@ const {
 } = require("./Configs/Packages.Import");
 
 // IMPORT LOCAL REQUIRED FILES
-const { UserAuthenticationRoute } = require("./Routes/index");
+const { AuthRouter, UserRouter, AdminRouter } = require("./Routes/index");
 const { Errors } = require("./Middlewares/index");
 const { CORS } = require("./Constants/Configuration.Constant");
 const { ERROR } = require("./Constants/Messages.Constant");
 const { NOT_FOUND } = require("./Constants/Status.Constant");
-const { USER } = require("./Constants/Routes.Constant");
+const { BASE_URL } = require("./Constants/Routes.Constant");
 
 // DOTENV CONFIG
 require("dotenv").config({ path: "./Configs/config.env" });
@@ -38,7 +38,9 @@ App.use(
 );
 
 // USE LOCAL REQUIRED FILES
-App.use(USER.AUTHENTICATION, UserAuthenticationRoute);
+App.use(BASE_URL.AUTHENTICATION, AuthRouter);
+App.use(BASE_URL.USER, UserRouter);
+App.use(BASE_URL.ADMIN, AdminRouter);
 
 // RETURN 404 NOT FOUND FOR ANY UNKNOWN API REQUESTS
 App.use((req, res, next) => {

@@ -3,14 +3,16 @@ const { Express } = require("../../../Configs/Packages.Import");
 
 // IMPORT LOCAL REQUIRED FILES
 const {
-  RegisterUser,
-} = require("../../../Controllers/User/V1/Authentication.Controllers");
+  SendStripeApiKey,
+  ProcessPayment,
+} = require("../../../Controllers/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
-Router.route("/register").post(RegisterUser);
+Router.route("/stripe/api-key").get(SendStripeApiKey);
+Router.route("/process").post(ProcessPayment);
 
 // EXPORT
 module.exports = Router;

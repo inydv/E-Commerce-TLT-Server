@@ -33,6 +33,10 @@ const ContactSchema = new Mongoose.Schema(
       required: [true, "Please Enter Message"],
       trim: true,
     },
+    progress: {
+      type: String,
+      enum: ["Success", "Processing", "Denied"],
+    },
   },
   {
     timestamps: true,
