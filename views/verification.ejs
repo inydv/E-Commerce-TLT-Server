@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE LITTLE THINGS</title>
+
+    <style>
+        .body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            display: grid;
+            place-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .body>div>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .body h1 {
+            color: white !important;
+            text-align: center;
+        }
+
+        .body a {
+            background-color: #191919;
+            border: none;
+            outline: none;
+            padding: 10px 20px;
+            color: white !important;
+            font-size: 17px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .body a:hover {
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body class="body">
+    <div>
+        <div>
+
+            <% if(type==="ERROR"){ %>
+                <?xml version="1.0" ?><svg data-name="Layer 1" height="200" id="Layer_1" viewBox="0 0 200 200"
+                    width="200" xmlns="http://www.w3.org/2000/svg" fill="red">
+                    <title />
+                    <path
+                        d="M100,15a85,85,0,1,0,85,85A84.93,84.93,0,0,0,100,15Zm0,150a65,65,0,1,1,65-65A64.87,64.87,0,0,1,100,165Z" />
+                    <path
+                        d="M128.5,74a9.67,9.67,0,0,0-14,0L100,88.5l-14-14a9.9,9.9,0,0,0-14,14l14,14-14,14a9.9,9.9,0,0,0,14,14l14-14,14,14a9.9,9.9,0,0,0,14-14l-14-14,14-14A10.77,10.77,0,0,0,128.5,74Z" />
+                </svg>
+                <% }else if(type==="SUCCESS"){ %>
+                    <?xml version="1.0" ?><svg id="Icons" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path fill="green"
+                            d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm5.707,8.707-7,7a1,1,0,0,1-1.414,0l-3-3a1,1,0,0,1,1.414-1.414L10,14.586l6.293-6.293a1,1,0,0,1,1.414,1.414Z" />
+                    </svg>
+                    <% } %>
+
+        </div>
+
+        <h1>
+            <%= h1 %>
+        </h1>
+        <div>
+            <a href="#">Go To Login</a>
+        </div>
+    </div>
+</body>
+
+</html>

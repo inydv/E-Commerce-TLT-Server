@@ -1,5 +1,5 @@
 // IMPORT REQUIRED PACKAGES
-const { Mongoose, CryptoJS } = require("../Configs/Packages.Import");
+const { Mongoose, CryptoJS, JWT } = require("../Configs/Packages.Import");
 
 // IMPORT LOCAL REQUIRED FILES
 const { EmailValidation, NumberValidation } = require("../Validations/index");
@@ -98,6 +98,13 @@ UserSchema.methods.ComparePassword = function (EnteredPassword) {
   }
 
   return false;
+};
+
+// JWT TOKEN
+UserSchema.methods.GetJWTToken = function () {
+  return JWT.sign({ id: this._id }, process.env.JWT_KEY, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
 };
 
 module.exports = Mongoose.model("UserSchema", UserSchema);

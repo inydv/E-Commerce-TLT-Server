@@ -9,16 +9,17 @@ const {
   GetProductReview,
   DeleteProductReview,
 } = require("../../../Controllers/index");
+const { ValidateID } = require("../../../Middlewares/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
 Router.route("/").get(GetAllProduct);
-Router.route("/:id").get(GetProductDetail);
 Router.route("/reviews").post(CreateProductReview);
-Router.route("/review/:product-id").get(GetProductReview);
-Router.route("/review/:id").delete(DeleteProductReview);
+Router.route("/:productId").get(ValidateID, GetProductDetail);
+Router.route("/review/:productId").get(ValidateID, GetProductReview);
+Router.route("/review/:productId").delete(ValidateID, DeleteProductReview);
 
 // EXPORT
 module.exports = Router;

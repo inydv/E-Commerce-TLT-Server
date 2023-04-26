@@ -8,16 +8,17 @@ const {
   UpdateContactDetail,
   DeleteContactDetail,
 } = require("../../../Controllers/index");
+const { ValidateID } = require("../../../Middlewares/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
 Router.route("/").get(GetAllContacts);
-Router.route("/:contact-id")
-  .get(GetContactDetail)
-  .patch(UpdateContactDetail)
-  .delete(DeleteContactDetail);
+Router.route("/:contactId")
+  .get(ValidateID, GetContactDetail)
+  .patch(ValidateID, UpdateContactDetail)
+  .delete(ValidateID, DeleteContactDetail);
 
 // EXPORT
 module.exports = Router;

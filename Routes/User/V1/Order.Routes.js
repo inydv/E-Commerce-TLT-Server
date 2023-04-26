@@ -7,13 +7,14 @@ const {
   GetOrderDetail,
   CreateOrder,
 } = require("../../../Controllers/index");
+const { ValidateID } = require("../../../Middlewares/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
 Router.route("/").get(GetMyOrders).post(CreateOrder);
-Router.route("/:order-id").get(GetOrderDetail);
+Router.route("/:orderId").get(ValidateID, GetOrderDetail);
 
 // EXPORT
 module.exports = Router;

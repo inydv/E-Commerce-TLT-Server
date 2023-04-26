@@ -1,5 +1,6 @@
 // IMPORT LOCAL REQUIRED FILES
 const { ROUTES } = require("../Constants/Routes.Constant");
+const { IsAuthenticatedUser, AuthorizeRole } = require("../Middlewares/index");
 
 // IMPORT REQUIRED ROUTES -- USER/ADMIN
 const AuthenticationRoute = require("./Authentication.Routes");
@@ -81,6 +82,10 @@ const AdminRoutes = [
     Route: AdminUserRoute,
   },
 ];
+
+// ROUTES CONFIG
+UserRouter.use(IsAuthenticatedUser);
+AdminRouter.use(IsAuthenticatedUser, AuthorizeRole("Admin"));
 
 // USING THE ROUTES
 AuthRoute.forEach((route) => AuthRouter.use(route.Path, route.Route));

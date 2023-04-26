@@ -7,13 +7,16 @@ const {
   UpdateOrder,
   DeleteOrder,
 } = require("../../../Controllers/index");
+const { ValidateID } = require("../../../Middlewares/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
 Router.route("/").get(GetAllOrders);
-Router.route("/:order-id").post(UpdateOrder).delete(DeleteOrder);
+Router.route("/:orderId")
+  .post(ValidateID, UpdateOrder)
+  .delete(ValidateID, DeleteOrder);
 
 // EXPORT
 module.exports = Router;

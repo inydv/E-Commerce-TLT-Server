@@ -2,13 +2,13 @@
 const { Express } = require("../../../Configs/Packages.Import");
 
 // IMPORT LOCAL REQUIRED FILES
-const { GetMyInformation } = require("../../../Controllers/index");
+const { UpdateUserInformation } = require("../../../Controllers/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
-Router.route("/").get(GetMyInformation);
+Router.route("/update").put(UpdateUserInformation);
 
 // EXPORT
 module.exports = Router;

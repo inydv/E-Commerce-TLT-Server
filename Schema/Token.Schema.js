@@ -23,9 +23,8 @@ const TokenSchema = new Mongoose.Schema({
   },
 });
 
-// GENERATE TOKEN
+// GENERATE TOKEN BEFORE CREATE
 TokenSchema.pre("save", function (next) {
-  console.log("hey1")
   this.token = Crypto.randomBytes(20).toString("hex");
 
   next();

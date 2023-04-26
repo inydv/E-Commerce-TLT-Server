@@ -5,6 +5,10 @@ module.exports = {
     SERVER: "SERVER IS WORKING ON ${PORT}.....",
     MONGODB: "MONGODB CONNECTED WITH SERVER: ${CONNECTION_HOST}",
     EMAIL_SENT: "EMAIL SENT TO ${EMAIL} SUCCESSFULLY",
+    LOGOUT: "YOU HAVE BEEN LOGGED OUT",
+    LOGIN: "LOGIN SUCCESSFULLY",
+    CHANGE_PASSWORD: "CHANGED PASSWORD SUCCESSFULLY",
+    VERIFIED: "VERIFIED SUCCESSFULLY",
   },
 
   // WARNING MESSAGES
@@ -16,11 +20,19 @@ module.exports = {
     UNCAUGHT_EXCEPTION: "UCAUGHT EXCEPTION!💥 SHUTTING down.....",
     UNHANDLED_REJECTION: "UNHANDLED REJECTION!💥 SHUTTING down.....",
     WRONG_MONGOID: "LOOK LIKE MONGO ID IS NOT VALID.....",
+    WRONG_TOKEN: "LOOK LIKE MONGO TOKEN IS NOT VALID.....",
     CAST_ERROR: "RESOURCE NOT FOUND. INVALID: ${PATH}",
     MONGODB_DUPLICATE_KEY: "DUPLICATE ${KEY_VALUE} ENTERED.....",
     WRONG_JWT: "JSON WEB TOKEN IS INVALID..... PLEASE TRY AGAIN.....",
     EXPIRE_JWT: "JSON WEB TOKEN IS EXPIRED..... PLEASE TRY AGAIN.....",
     INTERNAL_SERVER: "INTERNAL SERVER ERROR.....",
+    INCORRECT: "INCORRECT ${NAME}",
+    UNVERIFIED_ACCOUNT: "PLEASE VERIFLY YOUR ACCOUNT",
+    INVALID_TOKEN: "TOKEN IS INVALID OR HAS BEEN EXPIRED",
+    USER_NOT_FOUD: "USER NOT FOUND",
+    NOT_VERIFIED: "VERIFICATION FAILED",
+    LOGIN: "PLEASE LOGIN",
+    ROLE: "${ROLE} IS NOT ALLOWED TO ACCESS THIS RESOURCE"
   },
 
   // EMAIL SUBJECT
@@ -28,10 +40,20 @@ module.exports = {
     VERIFICATION_ACCOUNT_1: `We're happy you signed up for The Little Things. To start exploring The Little Things,`,
     VERIFICATION_ACCOUNT_2:
       "Please verify your account by clicking the link below:",
+    RESET_PASSWORD_1: `Opps!!!!! Look like you have forgot your password, But don't worry,`,
+    RESET_PASSWORD_2:
+      "You can reset your account password by clicking the link below:",
   },
 
   // EMAIL TITLE
   TITLE: {
     VERIFICATION_ACCOUNT: "Verify Your Account",
+    RESET_PASSWORD: "Reset Password",
+  },
+
+  // VERIFICATION
+  VERIFICATION: {
+    SUCCESS: "You Are Verified Successfully",
+    ERROR: "Opps!!!!! You Are Not Verified.",
   },
 };

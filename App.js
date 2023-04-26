@@ -13,6 +13,7 @@ const { CORS } = require("./Constants/Configuration.Constant");
 const { ERROR } = require("./Constants/Messages.Constant");
 const { NOT_FOUND } = require("./Constants/Status.Constant");
 const { BASE_URL } = require("./Constants/Routes.Constant");
+const { ErrorHandler } = require("./Utilities/index");
 
 // DOTENV CONFIG
 require("dotenv").config({ path: "./Configs/config.env" });
@@ -36,6 +37,9 @@ App.use(
     credentials: true,
   })
 );
+
+// SET VIEW ENGINE
+App.set("view engine", "ejs");
 
 // USE LOCAL REQUIRED FILES
 App.use(BASE_URL.AUTHENTICATION, AuthRouter);

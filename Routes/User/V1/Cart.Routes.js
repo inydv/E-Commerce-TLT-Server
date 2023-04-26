@@ -7,13 +7,16 @@ const {
   UpdateCart,
   DeleteCart,
 } = require("../../../Controllers/index");
+const { ValidateID } = require("../../../Middlewares/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
 Router.route("/").post(CreateCart);
-Router.route("/:user-id/:product-id").patch(UpdateCart).delete(DeleteCart);
+Router.route("/:userId/:productId")
+  .patch(ValidateID, UpdateCart)
+  .delete(ValidateID, DeleteCart);
 
 // EXPORT
 module.exports = Router;

@@ -37,6 +37,9 @@ const Path = require("path");
 // CRYPTO
 const Crypto = require("crypto");
 
+// JWT
+const JWT = require("jsonwebtoken");
+
 // EXPORT
 module.exports = {
   Mongoose,
@@ -52,4 +55,5 @@ module.exports = {
   EJS,
   Path,
   Crypto,
+  JWT
 };

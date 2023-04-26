@@ -6,6 +6,7 @@ const {
   ForgotPassword,
   ResetPassword,
   VerifyAccount,
+  GetMyInformation,
 } = require("./Authentication.Controllers");
 
 // IMPORT REQUIRED CONTROLLERS -- USER
@@ -31,7 +32,7 @@ const {
   GetProductDetail,
   GetProductReview,
 } = require("./User/V1/Product.Controllers");
-const { GetMyInformation } = require("./User/V1/User.Controllers");
+const { UpdateUserInformation } = require("./User/V1/User.Controllers");
 
 // IMPORT REQUIRED CONTROLLERS -- ADMIN
 const {
@@ -94,4 +95,5 @@ module.exports = {
   GetAllUsers,
   GetUserDetail,
   UpdateUserRole,
+  UpdateUserInformation,
 };
