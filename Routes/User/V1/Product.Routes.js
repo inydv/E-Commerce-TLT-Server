@@ -5,8 +5,7 @@ const { Express } = require("../../../Configs/Packages.Import");
 const {
   GetAllProduct,
   GetProductDetail,
-  CreateProductReview,
-  GetProductReview,
+  UpdateProductReview,
   DeleteProductReview,
 } = require("../../../Controllers/index");
 const { ValidateID } = require("../../../Middlewares/index");
@@ -16,10 +15,9 @@ const Router = Express.Router();
 
 // ROUTES
 Router.route("/").get(GetAllProduct);
-Router.route("/reviews").post(CreateProductReview);
 Router.route("/:productId").get(ValidateID, GetProductDetail);
-Router.route("/review/:productId").get(ValidateID, GetProductReview);
-Router.route("/review/:productId").delete(ValidateID, DeleteProductReview);
+Router.route("/review/:productId").put(ValidateID, UpdateProductReview);
+Router.route("/review/:productId/:reviewId").delete(ValidateID, DeleteProductReview);
 
 // EXPORT
 module.exports = Router;

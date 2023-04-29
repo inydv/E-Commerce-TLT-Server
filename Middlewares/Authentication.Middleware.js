@@ -8,6 +8,9 @@ const { UserSchema } = require("../Schema/index");
 // IMPORT REQUIRED PACKAGES
 const { JWT } = require("../Configs/Packages.Import");
 
+// ENV CONFIG
+require("dotenv").config("../Configs/config.env");
+
 // VALIDATE USER IS LOGGED IN OR NOT
 const IsAuthenticatedUser = CatchAsyncError(async (req, res, next) => {
   // DESTRUCTURE TOKEN FROM COOKIES
@@ -19,13 +22,15 @@ const IsAuthenticatedUser = CatchAsyncError(async (req, res, next) => {
   }
 
   // VERIFY THE TOKEN
-  const Data = JWT.verify(Token, process.env.JWT_SEC);
+  const Data = JWT.verify(Token, process.env.JWT_KEY);
 
-  req.user = await GetById(UserSchema, Data.id);
+  req.user = await GetById(UserSchema, Data.id, true);
 
   // IF USER NOT FIND
   if (!req.user) {
-    return next(new ErrorHandler(ERROR.USER_NOT_FOUD, UNAUTORIZE));
+    return next(
+      new ErrorHandler(ERROR.NOT_FOUND.replace("${NAME}", "USER"), UNAUTORIZE)
+    );
   }
 
   next();

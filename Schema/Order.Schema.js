@@ -35,8 +35,8 @@ const OrderSchema = new Mongoose.Schema(
       addressLine1: {
         type: String,
         required: [true, "Please Enter Address Line 1"],
-        maxlength: [100, "Name Can't Exceed 100 Characters"],
-        minlength: [20, "Name Should've More Than 20 Characaters"],
+        maxlength: [100, "Address Can't Exceed 100 Characters"],
+        minlength: [20, "Address Should've More Than 20 Characaters"],
         trim: true,
       },
       addressLine2: {
@@ -83,15 +83,13 @@ const OrderSchema = new Mongoose.Schema(
       },
       status: {
         type: String,
-        enum: ["Pending", "Failed", "Completed"],
-        required: [true, "Invalid Status"],
+        default: "Complete",
       },
     },
 
     orderStatus: {
       type: String,
-      enum: ["Processing", "Dispatch", "Delivered", "Cancelled"],
-      required: [true, "Invalid Order Status"],
+      enum: ["Processing", "Shipped", "Delivered", "Cancelled"],
       default: "Processing",
     },
 
@@ -124,15 +122,15 @@ OrderSchema.path("orderItems.quantity").validate(function (Number) {
 
 // POPULATE BEFORE FIND METHOD
 OrderSchema.pre(/^find/, function (next) {
-  this.populate(
-    {
-      path: "user",
-      select: "username -email",
-    },
-    {
-      path: "orderItems.productId",
-    }
-  );
+  this.populate({
+    path: "user",
+    select: "-email",
+  });
+
+  this.populate({
+    path: "orderItems.product",
+  });
+
   next();
 });
 

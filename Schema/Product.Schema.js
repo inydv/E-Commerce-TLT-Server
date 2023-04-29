@@ -37,7 +37,7 @@ const ProductSchema = new Mongoose.Schema(
       type: String,
       required: [true, "Please Select Product Category"],
     },
-    "sub-categories": {
+    subCategories: {
       type: String,
       required: [true, "Please Select Product Sub-Category"],
     },
@@ -58,15 +58,12 @@ const ProductSchema = new Mongoose.Schema(
         user: {
           type: Mongoose.Schema.ObjectId,
           ref: "UserSchema",
-          required: [true, "Invalid User ID"],
         },
         rating: {
           type: Number,
-          required: [true, "Please Select Rating"],
         },
         comment: {
           type: String,
-          required: [true, "Please Enter Comment"],
           minlength: [50, "Comment Should've More Than 50 Characters"],
           maxlength: [200, "Comment Can't Exceed 200 Characters"],
         },
@@ -102,7 +99,7 @@ ProductSchema.path("reviews.rating").validate(function (Number) {
 ProductSchema.pre(/^find/, function (next) {
   this.populate({
     path: "reviews.user",
-    select: "username -email",
+    select: "-email",
   });
   next();
 });

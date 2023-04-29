@@ -5,7 +5,7 @@ const { Express } = require("../../../Configs/Packages.Import");
 const {
   GetAllContacts,
   GetContactDetail,
-  UpdateContactDetail,
+  UpdateContactStatus,
   DeleteContactDetail,
 } = require("../../../Controllers/index");
 const { ValidateID } = require("../../../Middlewares/index");
@@ -17,7 +17,7 @@ const Router = Express.Router();
 Router.route("/").get(GetAllContacts);
 Router.route("/:contactId")
   .get(ValidateID, GetContactDetail)
-  .patch(ValidateID, UpdateContactDetail)
+  .patch(ValidateID, UpdateContactStatus)
   .delete(ValidateID, DeleteContactDetail);
 
 // EXPORT

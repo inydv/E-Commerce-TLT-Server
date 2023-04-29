@@ -33,9 +33,14 @@ const ContactSchema = new Mongoose.Schema(
       required: [true, "Please Enter Message"],
       trim: true,
     },
-    progress: {
+    status: {
       type: String,
       enum: ["Success", "Processing", "Denied"],
+      default: "Processing",
+    },
+    user: {
+      type: Mongoose.Types.ObjectId,
+      ref: "UserSchema",
     },
   },
   {
@@ -47,5 +52,15 @@ const ContactSchema = new Mongoose.Schema(
 ContactSchema.path("email").validate(function (Email) {
   return EmailValidation(Email);
 }, "Enter Valid Email");
+
+// POPULATE BEFORE FIND METHOD
+ContactSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: "user",
+    select: "-email",
+  });
+
+  next();
+});
 
 module.exports = Mongoose.model("ContactSchema", ContactSchema);

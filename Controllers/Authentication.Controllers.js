@@ -153,7 +153,7 @@ exports.ForgotPassword = CatchAsyncError(async (req, res, next) => {
 
   // IF USER IS NULL
   if (!user) {
-    return next(new ErrorHandler(ERROR.USER_NOT_FOUD, UNAUTORIZE));
+    return next(new ErrorHandler(ERROR.NOT_FOUND.replace("${NAME}", "USER"), UNAUTORIZE));
   }
 
   // IF USER IS NOT VERIFIED
@@ -236,7 +236,7 @@ exports.ResetPassword = CatchAsyncError(async (req, res, next) => {
 
   // IF USER NOT FOUND
   if (!user) {
-    return next(new ErrorHandler(ERROR.USER_NOT_FOUD, UNAUTORIZE));
+    return next(new ErrorHandler(ERROR.NOT_FOUND.replace("${NAME}", "USER"), UNAUTORIZE));
   }
 
   // CHANGE USER PASSWORD
@@ -299,9 +299,4 @@ exports.VerifyAccount = CatchAsyncError(async (req, res, next) => {
     h1: VERIFICATION.SUCCESS,
     type: "SUCCESS",
   });
-});
-
-// GET MY INFORMATION
-exports.GetMyInformation = CatchAsyncError(async (req, res, next) => {
-  SendToken(req.user, res);
 });

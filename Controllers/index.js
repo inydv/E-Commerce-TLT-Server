@@ -6,15 +6,10 @@ const {
   ForgotPassword,
   ResetPassword,
   VerifyAccount,
-  GetMyInformation,
 } = require("./Authentication.Controllers");
 
 // IMPORT REQUIRED CONTROLLERS -- USER
-const {
-  CreateCart,
-  DeleteCart,
-  UpdateCart,
-} = require("./User/V1/Cart.Controllers");
+const { CreateCart, UpdateCart } = require("./User/V1/Cart.Controllers");
 const { CreateContact } = require("./User/V1/Contact.Controllers");
 const {
   CreateOrder,
@@ -26,30 +21,33 @@ const {
   SendStripeApiKey,
 } = require("./User/V1/Payment.Controller");
 const {
-  CreateProductReview,
   DeleteProductReview,
   GetAllProduct,
   GetProductDetail,
-  GetProductReview,
+  UpdateProductReview,
 } = require("./User/V1/Product.Controllers");
-const { UpdateUserInformation } = require("./User/V1/User.Controllers");
+const {
+  GetMyInformation,
+  UpdateUserInformation,
+} = require("./User/V1/User.Controllers");
 
 // IMPORT REQUIRED CONTROLLERS -- ADMIN
 const {
   DeleteContactDetail,
   GetAllContacts,
   GetContactDetail,
-  UpdateContactDetail,
+  UpdateContactStatus,
 } = require("./Admin/V1/Contact.Controllers");
 const {
   DeleteOrder,
   GetAllOrders,
-  UpdateOrder,
+  UpdateOrderStatus,
 } = require("./Admin/V1/Order.Controllers");
 const {
   CreateProduct,
   DeleteProduct,
   UpdateProduct,
+  DeleteUserProductReview,
 } = require("./Admin/V1/Product.Controllers");
 const {
   DeleteUser,
@@ -67,7 +65,6 @@ module.exports = {
   ResetPassword,
   VerifyAccount,
   CreateCart,
-  DeleteCart,
   UpdateCart,
   CreateContact,
   CreateOrder,
@@ -75,25 +72,25 @@ module.exports = {
   GetOrderDetail,
   ProcessPayment,
   SendStripeApiKey,
-  CreateProductReview,
   DeleteProductReview,
   GetAllProduct,
   GetProductDetail,
-  GetProductReview,
+  UpdateProductReview,
   GetMyInformation,
+  UpdateUserInformation,
   DeleteContactDetail,
   GetAllContacts,
   GetContactDetail,
-  UpdateContactDetail,
+  UpdateContactStatus,
   DeleteOrder,
   GetAllOrders,
-  UpdateOrder,
+  UpdateOrderStatus,
   CreateProduct,
   DeleteProduct,
   UpdateProduct,
+  DeleteUserProductReview,
   DeleteUser,
   GetAllUsers,
   GetUserDetail,
   UpdateUserRole,
-  UpdateUserInformation,
 };

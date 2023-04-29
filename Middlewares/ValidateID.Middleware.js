@@ -6,8 +6,12 @@ const { UNPROCESSABLE } = require("../Constants/Status.Constant");
 
 // MONGOID VALIDATION MIDDLEWARE
 const ValidateID = CatchAsyncError(async (req, res, next) => {
-  if (!MongoID(req.params.id)) {
-    return next(new ErrorHandler(ERROR.WRONG_MONGOID, UNPROCESSABLE));
+  for (var key in req.params) {
+    if (req.params.hasOwnProperty(key)) {
+      if (!MongoID(req.params[key])) {
+        return next(new ErrorHandler(ERROR.WRONG_MONGOID, UNPROCESSABLE));
+      }
+    }
   }
 
   next();

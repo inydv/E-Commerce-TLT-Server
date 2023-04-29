@@ -18,7 +18,7 @@ module.exports = (error, req, res, next) => {
   // WRONG MONGODB ID ERROR
   if (error.name === "CastError") {
     const Message = ERROR.CAST_ERROR.replace("${PATH}", error.path);
-    error = new ErrorHandler(Message, 400).toUpperCase();
+    error = new ErrorHandler(Message.toUpperCase(), 400);
   }
 
   // MONGOOSE DUPLICATE KEY ERROR

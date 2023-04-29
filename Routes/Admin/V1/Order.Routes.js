@@ -4,7 +4,7 @@ const { Express } = require("../../../Configs/Packages.Import");
 // IMPORT LOCAL REQUIRED FILES
 const {
   GetAllOrders,
-  UpdateOrder,
+  UpdateOrderStatus,
   DeleteOrder,
 } = require("../../../Controllers/index");
 const { ValidateID } = require("../../../Middlewares/index");
@@ -15,7 +15,7 @@ const Router = Express.Router();
 // ROUTES
 Router.route("/").get(GetAllOrders);
 Router.route("/:orderId")
-  .post(ValidateID, UpdateOrder)
+  .patch(ValidateID, UpdateOrderStatus)
   .delete(ValidateID, DeleteOrder);
 
 // EXPORT

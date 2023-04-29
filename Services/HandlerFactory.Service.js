@@ -5,17 +5,26 @@ const Create = (Model, ReqBody) => {
 
 // UPDATE
 const Update = async (Model, Id, ReqBody) => {
-  return Model.findByIdAndUpdate(Id, { $set: ReqBody }, { new: true });
+  return Model.findByIdAndUpdate(
+    Id,
+    { $set: ReqBody },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 };
 
-// DELETE
-const Delete = async (Model, ReqBody) => {};
-
 // GET ALL
-const GetAll = async (Model, ReqBody) => {};
+const GetAll = async (Model) => {
+  return Model.find();
+};
 
 // GET BY ID
-const GetById = async (Model, Id) => {
+const GetById = async (Model, Id, IsAuth = false) => {
+  if (IsAuth) {
+    return Model.findById(Id).select("+password +isVerified +role");
+  }
   return Model.findById(Id);
 };
 
@@ -31,7 +40,6 @@ const Get = async (Model, ReqBody, IsAuth = false) => {
 module.exports = {
   Create,
   Update,
-  Delete,
   GetAll,
   GetById,
   Get,

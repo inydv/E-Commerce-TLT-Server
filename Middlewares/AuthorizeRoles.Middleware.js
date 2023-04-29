@@ -8,12 +8,7 @@ const AuthorizeRole = (...roles) => {
   // ...roles as array
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      return next(
-        new ErrorHandler(
-          ERROR.ROLE.replace("${ROLE}", req.user.role),
-          UNAUTORIZE
-        )
-      );
+      return next(new ErrorHandler(ERROR.ROLE, UNAUTORIZE));
     }
 
     next();
