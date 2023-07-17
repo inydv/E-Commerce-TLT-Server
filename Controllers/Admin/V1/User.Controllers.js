@@ -1,3 +1,6 @@
+// IMPORT REQUIRED PACKAGES
+const Cloudinary = require("cloudinary");
+
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
 const {
@@ -13,9 +16,6 @@ const {
   INTERNAL_SERVER_ERROR,
 } = require("../../../Constants/Status.Constant");
 const { UserSchema } = require("../../../Schema/index");
-
-// IMPORT REQUIRED PACKAGES
-const { Cloudinary } = require("../../../Configs/Packages.Import");
 
 // GET ALL USERS
 exports.GetAllUsers = CatchAsyncError(async (req, res, next) => {

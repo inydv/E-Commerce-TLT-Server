@@ -1,5 +1,5 @@
 // IMPORT REQUIRED PACKAGES
-const { Mongoose } = require("../Configs/Packages.Import");
+const Mongoose = require("mongoose");
 
 // IMPORT LOCAL REQUIRED FILES
 const { EmailValidation, NumberValidation } = require("../Validations/index");

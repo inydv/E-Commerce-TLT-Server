@@ -1,3 +1,6 @@
+// IMPORT REQUIRED PACKAGES
+const Express = require("express");
+
 // IMPORT LOCAL REQUIRED FILES
 const { ROUTES } = require("../Constants/Routes.Constant");
 const { IsAuthenticatedUser, AuthorizeRole } = require("../Middlewares/index");
@@ -18,9 +21,6 @@ const AdminContactRoute = require("./Admin/V1/Contact.Routes");
 const AdminOrderRoute = require("./Admin/V1/Order.Routes");
 const AdminProductRoute = require("./Admin/V1/Product.Routes");
 const AdminUserRoute = require("./Admin/V1/User.Routes");
-
-// IMPORT REQUIRED PACKAGES
-const { Express } = require("../Configs/Packages.Import");
 
 // ROUTER
 const AuthRouter = Express.Router();

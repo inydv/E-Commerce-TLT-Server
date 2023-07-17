@@ -1,5 +1,7 @@
 // IMPORT REQUIRED PACKAGES
-const { NodeMailer, Path, EJS } = require("../Configs/Packages.Import");
+const NodeMailer = require("nodemailer");
+const EJS = require("ejs");
+const Path = require("path");
 
 // EXPORT SEND EMAIL
 module.exports = async ({ Title, Email, Subject_1, Subject_2, Link }) => {

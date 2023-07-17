@@ -1,10 +1,8 @@
 // IMPORT REUIRED PACKAGES
-const {
-  Express,
-  CookieParser,
-  Cors,
-  BodyParser,
-} = require("./Configs/Packages.Import");
+const Express = require("express");
+const CookieParser = require("cookie-parser");
+const Cors = require("cors");
+const BodyParser = require("body-parser");
 
 // IMPORT LOCAL REQUIRED FILES
 const { AuthRouter, UserRouter, AdminRouter } = require("./Routes/index");

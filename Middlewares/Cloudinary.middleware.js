@@ -1,5 +1,5 @@
 // IMPORT REQUIRED PACKAGE
-const { Cloudinary } = require("../Configs/Packages.Import");
+const Cloudinary = require("cloudinary");
 
 // HANDLE SINGLE IMAGE
 const SingleImage = async (req, res, next) => {

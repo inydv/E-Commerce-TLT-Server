@@ -1,12 +1,12 @@
+// IMPORT REQUIRED PACKAGES
+const JWT = require("jsonwebtoken");
+
 // IMPORT LOCAL REQUIRED FILES
 const { ErrorHandler, CatchAsyncError } = require("../Utilities/index");
 const { ERROR } = require("../Constants/Messages.Constant");
 const { UNAUTORIZE } = require("../Constants/Status.Constant");
 const { GetById } = require("../Services/HandlerFactory.Service");
 const { UserSchema } = require("../Schema/index");
-
-// IMPORT REQUIRED PACKAGES
-const { JWT } = require("../Configs/Packages.Import");
 
 // ENV CONFIG
 require("dotenv").config("../Configs/config.env");

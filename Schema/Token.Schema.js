@@ -1,5 +1,6 @@
 // IMPORT REQUIRED PACKAGES
-const { Mongoose, Crypto } = require("../Configs/Packages.Import");
+const Mongoose = require("mongoose");
+const Crypto = require("crypto");
 
 // TOKEN SCHEMA
 const TokenSchema = new Mongoose.Schema({

@@ -1,5 +1,6 @@
 // IMPORT REQUIRED PACKAGES
-const { Cloudinary, FileUpload } = require("./Configs/Packages.Import");
+const Cloudinary = require("cloudinary");
+const FileUpload = require("express-fileupload");
 
 // IMPORT LOCAL REQUIRED FILES
 const App = require("./App");

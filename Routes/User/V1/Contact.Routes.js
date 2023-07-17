@@ -1,5 +1,5 @@
 // IMPORT REQUIRED PACKAGES
-const { Express } = require("../../../Configs/Packages.Import");
+const Express = require("express");
 
 // IMPORT LOCAL REQUIRED FILES
 const { CreateContact } = require("../../../Controllers/index");

@@ -1,5 +1,7 @@
 // IMPORT REQUIRED PACKAGES
-const { Mongoose } = require("./Packages.Import");
+const Mongoose = require("mongoose");
+
+// IMPORT LOCAL REQUIRED FILES
 const { SUCCESSFUL } = require("../Constants/Messages.Constant");
 
 // REPLACE PASSWORD IN MONGO URL
@@ -16,7 +18,9 @@ const connectDatabase = () => {
     useUnifiedTopology: true,
   })
     .then((data) => {
-      console.log(SUCCESSFUL.MONGODB.replace("${CONNECTION_HOST}", data.connection.host));
+      console.log(
+        SUCCESSFUL.MONGODB.replace("${CONNECTION_HOST}", data.connection.host)
+      );
     })
     .catch((err) => console.log(err));
 };

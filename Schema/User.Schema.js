@@ -1,5 +1,7 @@
 // IMPORT REQUIRED PACKAGES
-const { Mongoose, CryptoJS, JWT } = require("../Configs/Packages.Import");
+const Mongoose = require("mongoose");
+const CryptoJS = require("crypto-js");
+const JWT = require("jsonwebtoken");
 
 // IMPORT LOCAL REQUIRED FILES
 const { EmailValidation, NumberValidation } = require("../Validations/index");
