@@ -2,7 +2,7 @@
 module.exports = {
   // CORS CONFIGURATION
   CORS: {
-    ORIGIN: "*",
+    ORIGIN: "http://localhost:5173",
     METHODS: "DELETE,GET,PATCH,POST,PUT",
   },
 

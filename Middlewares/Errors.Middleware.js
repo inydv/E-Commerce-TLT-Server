@@ -9,9 +9,10 @@ module.exports = (error, req, res, next) => {
 
   // VALIDATION ERROR
   if (error.name === "ValidationError") {
-    const Message = Object.values(error.errors)
-      .map((val) => val.message.toUpperCase())
-      .join(", ");
+    const Message = Object.values(error.errors)[0].message.toUpperCase();
+    // const Message = Object.values(error.errors)
+    // .map((val) => val.message.toUpperCase())
+    // .join(", ");
     error = new ErrorHandler(Message, 400);
   }
 

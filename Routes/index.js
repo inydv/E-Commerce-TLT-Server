@@ -84,12 +84,18 @@ const AdminRoutes = [
 ];
 
 // ROUTES CONFIG
-UserRouter.use(IsAuthenticatedUser);
 AdminRouter.use(IsAuthenticatedUser, AuthorizeRole("Admin"));
 
 // USING THE ROUTES
 AuthRoute.forEach((route) => AuthRouter.use(route.Path, route.Route));
-UserRoutes.forEach((route) => UserRouter.use(route.Path, route.Route));
+UserRoutes.forEach((route) => {
+  // IF ROUTE IS PRODUCT THEN NO NEED FOR AUTHENTICATION
+  if (route.Path === ROUTES.PRODUCT) {
+    UserRouter.use(route.Path, route.Route);
+  } else {
+    UserRouter.use(route.Path, IsAuthenticatedUser, route.Route);
+  }
+});
 AdminRoutes.forEach((route) => AdminRouter.use(route.Path, route.Route));
 
 // EXPORT

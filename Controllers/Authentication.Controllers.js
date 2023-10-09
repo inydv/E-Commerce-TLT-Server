@@ -132,6 +132,7 @@ exports.Logout = CatchAsyncError(async (req, res, next) => {
 
   // SEND RESPONSE
   res.status(200).json({
+    SUCCESS: true,
     message: SUCCESSFUL.LOGOUT,
   });
 });

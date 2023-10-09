@@ -19,19 +19,19 @@ require("dotenv").config({ path: "./Configs/config.env" });
 //EXPRESS
 const App = Express();
 
-// APP USE JSON FORMAT
-App.use(Express.json());
-
 // PARSER CONFIGS
 App.use(CookieParser());
 App.use(BodyParser.urlencoded({ extended: true }));
+
+// APP USE JSON FORMAT
+App.use(Express.json());
 
 // CORS
 App.use(
   Cors({
     origin: CORS.ORIGIN,
     methods: CORS.METHODS,
-    preflightContinue: true,
+    // preflightContinue: true,
     credentials: true,
   })
 );
