@@ -24,7 +24,7 @@ class ApiFeatures {
 
     // RATING REPLACEMENT
     if (ratings) {
-      ratingString = JSON.stringify(price).replace(
+      ratingString = JSON.stringify(ratings).replace(
         /\b(gt|gte|lt|lte)\b/g,
         (key) => `$${key}`
       );

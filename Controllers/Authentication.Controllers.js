@@ -23,6 +23,7 @@ const {
   SUCCESS,
   UNAUTORIZE,
   INTERNAL_SERVER_ERROR,
+  BAD
 } = require("../Constants/Status.Constant");
 const { BASE_URL, ROUTES } = require("../Constants/Routes.Constant");
 
@@ -182,14 +183,14 @@ exports.ForgotPassword = CatchAsyncError(async (req, res, next) => {
     token = await Create(TokenSchema, req.body);
   }
 
-  // VERIFICATION LINK
+  // RESET LINK // TODO
   const ResetLink =
     req.protocol +
     "://" +
     req.get("host") +
     BASE_URL.AUTHENTICATION +
     ROUTES.AUTH +
-    "/verify/account/" +
+    "/authentication" +
     token.token;
 
   try {
@@ -220,6 +221,16 @@ exports.ForgotPassword = CatchAsyncError(async (req, res, next) => {
 exports.ResetPassword = CatchAsyncError(async (req, res, next) => {
   // DESTRUCTURING REQUEST PARAMS
   const { token } = req.params;
+
+  // IF PASSWORD AND CONFIRM PASSWORD IS NOT SAME
+  if (req.body?.password !== req.body?.confirmPassword) {
+    return next(
+      new ErrorHandler(
+        ERROR.PASSWORD_NOT_MATCH,
+        BAD
+      )
+    );
+  }
 
   // GET TOKEN FROM DB
   const token_2 = await Get(TokenSchema, {
@@ -269,6 +280,10 @@ exports.VerifyAccount = CatchAsyncError(async (req, res, next) => {
 
   // IF TOKEN IS NULL
   if (!token_2) {
+    res.render("verification.ejs", {
+      h1: VERIFICATION.ERROR,
+      type: "ERROR",
+    });
     return next(new ErrorHandler(ERROR.INVALID_TOKEN, UNAUTORIZE));
   }
 

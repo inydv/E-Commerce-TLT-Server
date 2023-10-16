@@ -118,7 +118,7 @@ exports.UpdateProductReview = CatchAsyncError(async (req, res, next) => {
     );
   }
 
-  // IS ALREADY REVIED
+  // IS ALREADY REVIEWED
   const isReviewed = product.reviews.find(
     (rev) => rev.user._id.toString() === req.user._id.toString()
   );
@@ -130,13 +130,15 @@ exports.UpdateProductReview = CatchAsyncError(async (req, res, next) => {
   // CHECK IF IS REVIEWED OR NOT
   if (isReviewed) {
     product.reviews.forEach((rev) => {
-      if (rev.user_id.toString() === req.user._id.toString())
+      if (rev.user._id.toString() === req.user._id.toString())
         (rev.rating = rating), (rev.comment = comment);
     });
   } else {
     product.reviews.push(req.body);
-    numberOfReviews = product.reviews.length;
   }
+
+  // NO OF REVIEWS
+  numberOfReviews = product.reviews.length;
 
   // FIND AVERAGE
   product.reviews.forEach((rev) => {
@@ -152,7 +154,7 @@ exports.UpdateProductReview = CatchAsyncError(async (req, res, next) => {
   // SEND RESPONSE
   res.status(SUCCESS).json({
     SUCCESS: true,
-    MESSAGE: SUCCESSFUL.UPDATE.replace("${NAME}", "PRODUCT"),
+    MESSAGE: SUCCESSFUL.UPDATE.replace("${NAME}", "REVIEW"),
     DATA: updatedProduct,
   });
 });

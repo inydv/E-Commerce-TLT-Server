@@ -6,6 +6,7 @@ const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
 const {
   SUCCESS,
   UNPROCESSABLE,
+  BAD
 } = require("../../../Constants/Status.Constant");
 const { UserSchema } = require("../../../Schema/index");
 
@@ -34,6 +35,32 @@ exports.UpdateUserInformation = CatchAsyncError(async (req, res, next) => {
         UNPROCESSABLE
       )
     );
+  }
+
+  // IF USER CHANGE PASSWORD
+  if (req.body?.currentPassword) {
+    // COMPARE ENTERED PASSWORD AND DB PASSWORD
+    const isPasswordMatched = req.user.ComparePassword(req.body?.currentPassword);
+
+    // IS PASSWORD MATCHED
+    if (!isPasswordMatched) {
+      return next(
+        new ErrorHandler(
+          ERROR.INCORRECT.replace("${NAME}", "PASSWORD"),
+          BAD
+        )
+      );
+    }
+
+    // IF PASSWORD AND CONFIRM PASSWORD IS NOT SAME
+    if (req.body?.password !== req.body?.confirmPassword) {
+      return next(
+        new ErrorHandler(
+          ERROR.PASSWORD_NOT_MATCH,
+          BAD
+        )
+      );
+    }
   }
 
   // UPDATE USER

@@ -1,5 +1,10 @@
 // IMPORT REQUIRED PACKAGE
 const Cloudinary = require("cloudinary");
+const DatauriParser = require("datauri/parser");
+const Path = require("path");
+
+// CREATE PARSER
+const Parser = new DatauriParser();
 
 // HANDLE SINGLE IMAGE
 const SingleImage = async (req, res, next) => {
@@ -37,13 +42,17 @@ const SingleImage = async (req, res, next) => {
 // HANDLE MULTIPLE IMAGES
 const MultipleImages = async (req, res, next) => {
   // CHECK REQUEST BODY CONTAIN IMAGE OR NOT
-  if (req.body.images) {
+  if (req?.files) {
     const images = [];
 
     // ITRATE IN REQUESTED BODY IMAGES
-    for (let i = 0; i < req.body.images.length; i++) {
+    for (let i = 0; i < req?.files.length; i++) {
+      // PARSING THE IMAGE
+      const extName = Path.extname(req?.files[i]?.originalname).toString();
+      const file64 = Parser.format(extName, req?.files[i]?.buffer);
+
       // UPLOAD IMAGE
-      const result = await Cloudinary.v2.uploader.upload(req.body.images[i], {
+      const result = await Cloudinary.v2.uploader.upload(file64.content, {
         folder: "Products",
       });
 

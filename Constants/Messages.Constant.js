@@ -13,6 +13,7 @@ module.exports = {
     DELETE: "${NAME} DELETED SUCCESSFULLY",
     GET: "${NAME} GET SUCCESSFULLY",
     CREATE: "${NAME} CREATED SUCCESSFULLY",
+    SUBMIT: "${NAME} SUBMITTED SUCCESSFULLY"
   },
 
   // WARNING MESSAGES
@@ -39,7 +40,8 @@ module.exports = {
     ROLE: "YOU NOT ALLOWED TO ACCESS THIS RESOURCE",
     NOT_CHANGE: "SORRY, YOU CAN'T CHANGE ${NAME}",
     ORDER: "YOU HAVE ALREADY ${NAME} THIS ORDER",
-    NOT_DELETE: "YOU CAN'T DELETE OTHER'S ${NAME}"
+    NOT_DELETE: "YOU CAN'T DELETE OTHER'S ${NAME}",
+    PASSWORD_NOT_MATCH: "PASSWORD AND CONFIRM PASSWORD DON'T MATCH"
   },
 
   // EMAIL SUBJECT
@@ -61,6 +63,6 @@ module.exports = {
   // VERIFICATION
   VERIFICATION: {
     SUCCESS: "You Are Verified Successfully",
-    ERROR: "Opps!!!!! You Are Not Verified.",
+    ERROR: "Opps!!!!! Something Went Wrong",
   },
 };

@@ -7,16 +7,13 @@ const { SUCCESS } = require("../../../Constants/Status.Constant");
 
 // CREATE CONTACT
 exports.CreateContact = CatchAsyncError(async (req, res, next) => {
-  // ADD USER IN REQUEST BODY
-  req.body.user = req.user._id;
-
   // CREATE
   const contact = await Create(ContactSchema, req.body);
 
   // SEND RESPONSE
   res.status(SUCCESS).json({
     SUCCESS: true,
-    MESSAGE: SUCCESSFUL.CREATE.replace("${NAME}", "CONTACT"),
+    MESSAGE: SUCCESSFUL.SUBMIT.replace("${NAME}", "CONTACT FORM"),
     DATA: contact,
   });
 });

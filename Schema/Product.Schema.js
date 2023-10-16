@@ -17,8 +17,8 @@ const ProductSchema = new Mongoose.Schema(
     description: {
       type: String,
       required: [true, "Please Enter Product Description"],
-      minlength: [50, "Name Should've More Than 50 Characaters"],
-      maxlength: [200, "Name Can't Exceed 200 Characters"],
+      minlength: [50, "Description Should've More Than 50 Characaters"],
+      maxlength: [500, "Description Can't Exceed 500 Characters"],
       trim: true,
     },
     images: [
@@ -64,7 +64,7 @@ const ProductSchema = new Mongoose.Schema(
         },
         comment: {
           type: String,
-          minlength: [50, "Comment Should've More Than 50 Characters"],
+          minlength: [10, "Comment Should've More Than 10 Characters"],
           maxlength: [200, "Comment Can't Exceed 200 Characters"],
         },
       },
@@ -99,7 +99,7 @@ ProductSchema.path("reviews.rating").validate(function (Number) {
 ProductSchema.pre(/^find/, function (next) {
   this.populate({
     path: "reviews.user",
-    select: "-email",
+    select: "avatar username",
   });
   next();
 });
