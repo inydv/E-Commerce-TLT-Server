@@ -8,8 +8,8 @@ const { UNAUTORIZE } = require("../Constants/Status.Constant");
 const { GetById } = require("../Services/HandlerFactory.Service");
 const { UserSchema } = require("../Schema/index");
 
-// ENV CONFIG
-require("dotenv").config("../Configs/config.env");
+// DOTENV CONFIG
+require("dotenv").config({ path: "../Configs/config.env" });
 
 // VALIDATE USER IS LOGGED IN OR NOT
 const IsAuthenticatedUser = CatchAsyncError(async (req, res, next) => {

@@ -20,7 +20,9 @@ const { UserSchema } = require("../../../Schema/index");
 // GET ALL USERS
 exports.GetAllUsers = CatchAsyncError(async (req, res, next) => {
   // FIND ALL USERS
-  const users = await GetAll(UserSchema);
+  const users = await GetAll(UserSchema, {
+    role: "User"
+  });
 
   // IF USERS NOT FOUND
   if (!users) {

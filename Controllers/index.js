@@ -17,8 +17,9 @@ const {
   GetOrderDetail,
 } = require("./User/V1/Order.Controllers");
 const {
-  ProcessPayment,
-  SendStripeApiKey,
+  RazorpayCreateOrder,
+  GetKeyID,
+  PaymentVerification
 } = require("./User/V1/Payment.Controller");
 const {
   DeleteProductReview,
@@ -70,8 +71,9 @@ module.exports = {
   CreateOrder,
   GetMyOrders,
   GetOrderDetail,
-  ProcessPayment,
-  SendStripeApiKey,
+  RazorpayCreateOrder,
+  GetKeyID,
+  PaymentVerification,
   DeleteProductReview,
   GetAllProduct,
   GetProductDetail,

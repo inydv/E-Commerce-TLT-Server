@@ -2,17 +2,15 @@
 const Express = require("express");
 
 // IMPORT LOCAL REQUIRED FILES
-const {
-  SendStripeApiKey,
-  ProcessPayment,
-} = require("../../../Controllers/index");
+const { RazorpayCreateOrder, PaymentVerification, GetKeyID } = require("../../../Controllers/index");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();
 
 // ROUTES
-Router.route("/stripe/api-key").get(SendStripeApiKey);
-Router.route("/process").post(ProcessPayment);
+Router.route("/create/order").post(RazorpayCreateOrder);
+Router.route("/vertification").post(PaymentVerification);
+Router.route("/keyId").get(GetKeyID);
 
 // EXPORT
 module.exports = Router;

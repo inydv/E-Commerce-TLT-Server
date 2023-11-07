@@ -32,15 +32,9 @@ const OrderSchema = new Mongoose.Schema(
         type: Number,
         required: [true, "Please Enter Phone Number"],
       },
-      addressLine1: {
+      address: {
         type: String,
-        required: [true, "Please Enter Address Line 1"],
-        maxlength: [100, "Address Can't Exceed 100 Characters"],
-        minlength: [20, "Address Should've More Than 20 Characaters"],
-        trim: true,
-      },
-      addressLine2: {
-        type: String,
+        required: [true, "Please Enter Address"],
         trim: true,
       },
       city: {

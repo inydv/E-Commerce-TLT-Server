@@ -10,7 +10,7 @@ const { SUCCESSFUL } = require("../../../Constants/Messages.Constant");
 const { SUCCESS } = require("../../../Constants/Status.Constant");
 
 // CLOUDINARY DELETE FUNCTION
-async function DeleteFromCloud(images) {
+async function DeleteFromCloud(images, next) {
   // ITRATE IN IMAGES
   for (let i = 0; i < images.length; i++) {
     try {
@@ -55,7 +55,7 @@ exports.UpdateProduct = CatchAsyncError(async (req, res, next) => {
   if (req.body.images) {
     try {
       // REMOVE PRODUCT IMAGE FROM CLOUD
-      DeleteFromCloud(product.images);
+      DeleteFromCloud(product.images, next);
 
       // ADD PRODUCT IMAGE IN CLOUD
       let images = [];
@@ -107,7 +107,7 @@ exports.DeleteProduct = CatchAsyncError(async (req, res, next) => {
 
   try {
     // REMOVE PRODUCT IMAGE FROM CLOUD
-    DeleteFromCloud(product.images);
+    DeleteFromCloud(product.images, next);
   } catch (error) {
     // HANDLE ERROR
     return next(new ErrorHandler(error.message, INTERNAL_SERVER_ERROR));

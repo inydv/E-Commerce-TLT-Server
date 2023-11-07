@@ -16,8 +16,8 @@ const Update = async (Model, Id, ReqBody) => {
 };
 
 // GET ALL
-const GetAll = async (Model) => {
-  return Model.find();
+const GetAll = async (Model, filter = {}) => {
+  return Model.find(filter);
 };
 
 // GET BY ID
