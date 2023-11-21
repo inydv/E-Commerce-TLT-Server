@@ -8,18 +8,11 @@ const { EmailValidation, NumberValidation } = require("../Validations/index");
 const OrderSchema = new Mongoose.Schema(
   {
     shippingInformation: {
-      firstname: {
+      name: {
         type: String,
         required: true,
-        minlength: [2, "Firstname Should've More Than 2 Characaters"],
-        maxlength: [30, "Firstname Can't Exceed 30 Characters"],
-        trim: true,
-      },
-      lastname: {
-        type: String,
-        required: true,
-        minlength: [2, "Lastname Should've More Than 2 Characaters"],
-        maxlength: [30, "Lastname Can't Exceed 30 Characters"],
+        minlength: [2, "Name Should've More Than 2 Characaters"],
+        maxlength: [50, "Name Can't Exceed 30 Characters"],
         trim: true,
       },
       email: {
@@ -45,7 +38,7 @@ const OrderSchema = new Mongoose.Schema(
         type: String,
         required: [true, "Please Select State"],
       },
-      pinCode: {
+      pincode: {
         type: Number,
         required: [true, "Please Enter Pincode"],
       },
@@ -55,6 +48,7 @@ const OrderSchema = new Mongoose.Schema(
       {
         product: {
           type: Mongoose.Schema.ObjectId,
+          ref: "ProductSchema",
           required: [true, "Invalid Product ID"],
         },
         quantity: {
@@ -71,13 +65,17 @@ const OrderSchema = new Mongoose.Schema(
     },
 
     paymentInfo: {
-      id: {
+      razorpay_order_id: {
         type: String,
-        required: [true, "Invalid Payment ID"],
+        required: [true, "Invalid Razorpay Order ID"],
       },
-      status: {
+      razorpay_payment_id: {
         type: String,
-        default: "Complete",
+        required: [true, "Invalid Razorpay Payment ID"],
+      },
+      razorpay_signature: {
+        type: String,
+        required: [true, "Invalid Razorpay Signature"],
       },
     },
 
@@ -87,7 +85,10 @@ const OrderSchema = new Mongoose.Schema(
       default: "Processing",
     },
 
-    deliveredAt: Date,
+    deliveredAt: {
+      type: Date,
+      default: () => new Date(+new Date() + 4 * 24 * 60 * 60 * 1000)
+    },
   },
   {
     timestamps: true,
@@ -105,7 +106,7 @@ OrderSchema.path("shippingInformation.phone").validate(function (Number) {
 }, "Phone Number Should've 10 Digits");
 
 // CUSTOM VALIDATION FOR PINCODE SHIPPING INFORMATION
-OrderSchema.path("shippingInformation.pinCode").validate(function (Number) {
+OrderSchema.path("shippingInformation.pincode").validate(function (Number) {
   return NumberValidation(Number, 6, 6);
 }, "Pincode Should've 6 Digits");
 
@@ -122,7 +123,11 @@ OrderSchema.pre(/^find/, function (next) {
   });
 
   this.populate({
-    path: "orderItems.product",
+    path: "orderItems",
+    populate: {
+      path: "product",
+      select: "name images price",
+    },
   });
 
   next();

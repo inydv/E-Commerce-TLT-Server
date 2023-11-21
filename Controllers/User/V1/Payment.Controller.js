@@ -3,11 +3,13 @@ const Razorpay = require("razorpay");
 const Crypto = require("crypto");
 
 // IMPORT LOCAL REQUIRED FILES
-const { CatchAsyncError } = require("../../../Utilities/index");
+const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
 const { SUCCESS } = require("../../../Constants/Status.Constant");
 const { SUCCESSFUL } = require("../../../Constants/Messages.Constant");
+const { Create } = require("../../../Services/HandlerFactory.Service");
+const { OrderSchema } = require("../../../Schema/index");
 
-// CREATE ORDER
+// CREATE RAZORPAY ORDER
 exports.RazorpayCreateOrder = CatchAsyncError(async (req, res, next) => {
   // CREATE INSTANCE
   const Instance = new Razorpay({
@@ -35,7 +37,7 @@ exports.RazorpayCreateOrder = CatchAsyncError(async (req, res, next) => {
 
 // PAYMENT VERIFICATION
 exports.PaymentVerification = CatchAsyncError(async (req, res, next) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body.response;
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req?.body?.paymentInfo;
 
   const body = razorpay_order_id + "|" + razorpay_payment_id;
   const expectedSignature = Crypto.createHmac('sha256', process.env.RAZORPAY_SECRET_KEY)
@@ -44,10 +46,10 @@ exports.PaymentVerification = CatchAsyncError(async (req, res, next) => {
 
 
   if (expectedSignature === razorpay_signature) {
-    // SEND RESPONSE
     // UPDATE DATABASE
+    req.body.user = req.user._id;
+    await Create(OrderSchema, req.body);
 
-    res.redirect(`http://localhost:5173/paymentsuccess?reference=${razorpay_payment_id}`)
     res.status(SUCCESS).json({
       SUCCESS: true,
     });

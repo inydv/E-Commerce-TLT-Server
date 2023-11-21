@@ -28,7 +28,7 @@ exports.GetAllContacts = CatchAsyncError(async (req, res, next) => {
   // SEND RESPONSE
   res.status(SUCCESS).json({
     SUCCESS: true,
-    MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "USERS"),
+    MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "CONTACT"),
     DATA: contacts,
   });
 });

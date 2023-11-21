@@ -5,7 +5,6 @@ const Express = require("express");
 const {
   GetMyOrders,
   GetOrderDetail,
-  CreateOrder,
 } = require("../../../Controllers/index");
 const { ValidateID } = require("../../../Middlewares/index");
 
@@ -13,7 +12,7 @@ const { ValidateID } = require("../../../Middlewares/index");
 const Router = Express.Router();
 
 // ROUTES
-Router.route("/").get(GetMyOrders).post(CreateOrder);
+Router.route("/").get(GetMyOrders);
 Router.route("/:orderId").get(ValidateID, GetOrderDetail);
 
 // EXPORT
