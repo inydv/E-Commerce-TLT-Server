@@ -1,6 +1,8 @@
 // IMPORT REQUIRED PACKAGES
 const Cloudinary = require("cloudinary");
+const Express = require("express");
 const FileUpload = require("express-fileupload");
+const Path = require("path");
 
 // IMPORT LOCAL REQUIRED FILES
 const App = require("./App");
@@ -30,6 +32,12 @@ Cloudinary.config({
 
 // EXPRESS FILEUPLOAD
 App.use(FileUpload());
+
+// USE BUILD INDEX.JS
+App.use(Express.static(Path.join(__dirname, "dist")));
+App.get("/", (req, res) => {
+  res.sendFile('index.html', { root: Path.join(__dirname, 'dist') });
+})
 
 // CONNECTING TO DATABASE
 ConnectDatabase();

@@ -46,9 +46,9 @@ App.use(BASE_URL.USER, UserRouter);
 App.use(BASE_URL.ADMIN, AdminRouter);
 
 // RETURN 404 NOT FOUND FOR ANY UNKNOWN API REQUESTS
-App.use((req, res, next) => {
-  next(new ErrorHandler(ERROR.API_NOT_FOUND, NOT_FOUND));
-});
+// App.use((req, res, next) => {
+//   next(new ErrorHandler(ERROR.API_NOT_FOUND, NOT_FOUND));
+// });
 
 // ERROR HANDLER
 App.use(Errors);
