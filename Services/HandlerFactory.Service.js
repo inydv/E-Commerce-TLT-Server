@@ -23,7 +23,7 @@ const GetAll = async (Model, filter = {}) => {
 // GET BY ID
 const GetById = async (Model, Id, IsAuth = false) => {
   if (IsAuth) {
-    return Model.findById(Id).select("+password +isVerified +role");
+    return Model.findById(Id).select("+password +isVerified");
   }
   return Model.findById(Id);
 };
