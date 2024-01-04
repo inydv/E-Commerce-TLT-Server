@@ -1,12 +1,8 @@
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
-const { GetById, GetAll } = require("../../../Services/HandlerFactory.Service");
+const { GetById, GetAll, CountDocument } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
-const {
-  SUCCESS,
-  UNPROCESSABLE,
-  BAD,
-} = require("../../../Constants/Status.Constant");
+const { SUCCESS, UNPROCESSABLE, BAD } = require("../../../Constants/Status.Constant");
 const { OrderSchema, ProductSchema } = require("../../../Schema/index");
 
 // UPDATE STOCK FUNCTION
@@ -51,17 +47,9 @@ exports.GetAllOrders = CatchAsyncError(async (req, res, next) => {
 // UPDATE ORDER STATUS
 exports.UpdateOrderStatus = CatchAsyncError(async (req, res, next) => {
   // CHECK UPDATE OTHER THAN STATUS
-  if (
-    req.body.shippingInformation ||
-    req.body.orderItems ||
-    req.body.user ||
-    req.body.paymentInfo
-  ) {
+  if (req.body.shippingInformation || req.body.orderItems || req.body.user || req.body.paymentInfo) {
     return next(
-      new ErrorHandler(
-        ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN STATUS"),
-        UNPROCESSABLE
-      )
+      new ErrorHandler(ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN STATUS"), UNPROCESSABLE)
     );
   }
 
@@ -78,10 +66,7 @@ exports.UpdateOrderStatus = CatchAsyncError(async (req, res, next) => {
   // IF ORDER IS ALREADY CANCELLED
   if (order.orderStatus === "Cancelled") {
     return next(
-      new ErrorHandler(
-        ERROR.ORDER.replace("${NAME}", "CANCELLED"),
-        UNPROCESSABLE
-      )
+      new ErrorHandler(ERROR.ORDER.replace("${NAME}", "CANCELLED"), UNPROCESSABLE)
     );
   }
 
@@ -150,5 +135,28 @@ exports.DeleteOrder = CatchAsyncError(async (req, res, next) => {
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.DELETE.replace("${NAME}", "ORDER"),
+  });
+});
+
+// COUNT ORDERS
+exports.CountOrders = CatchAsyncError(async (req, res, next) => {
+  // FIND ORDERS COUNT
+  const allOrders = await CountDocument(OrderSchema);
+  const processingOrders = await CountDocument(OrderSchema, { status: "Processing" });
+  const outForDeliveryOrders = await CountDocument(OrderSchema, { status: "Out For Delivery" });
+  const deliveredOrders = await CountDocument(OrderSchema, { status: "Delivered" });
+  const cancelledOrders = await CountDocument(OrderSchema, { status: "Cancelled" });
+
+  // SEND RESPONSE
+  res.status(SUCCESS).json({
+    SUCCESS: true,
+    MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "ORDERS COUNT"),
+    DATA: {
+      ALL_ORDERS: allOrders,
+      PROCESSING_ORDERS: processingOrders,
+      OUT_FOR_DELIVERY_ORDERS: outForDeliveryOrders,
+      DELIVERED_ORDERS: deliveredOrders,
+      CANCELLED_ORDERS: cancelledOrders
+    },
   });
 });

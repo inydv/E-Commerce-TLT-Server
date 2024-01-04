@@ -1,16 +1,8 @@
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
-const {
-  Update,
-  GetById,
-  GetAll,
-} = require("../../../Services/HandlerFactory.Service");
+const { Update, GetById, GetAll } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
-const {
-  SUCCESS,
-  UNPROCESSABLE,
-  BAD,
-} = require("../../../Constants/Status.Constant");
+const { SUCCESS, UNPROCESSABLE, BAD } = require("../../../Constants/Status.Constant");
 const { ContactSchema } = require("../../../Schema/index");
 
 // GET ALL CONTACTS
@@ -56,19 +48,10 @@ exports.GetContactDetail = CatchAsyncError(async (req, res, next) => {
 // UPDATE CONTACT STATUS
 exports.UpdateContactStatus = CatchAsyncError(async (req, res, next) => {
   // CHECK UPDATE OTHER THAN STATUS
-  if (
-    req.body.firstname ||
-    req.body.lastname ||
-    req.body.email ||
-    req.body.subject ||
-    req.body.message ||
-    req.body.user
-  ) {
+  if (req.body.firstname || req.body.lastname || req.body.email || req.body.subject || req.body.message || req.body.user) {
     return next(
       new ErrorHandler(
-        ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN STATUS"),
-        UNPROCESSABLE
-      )
+        ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN STATUS"), UNPROCESSABLE)
     );
   }
 
@@ -102,5 +85,26 @@ exports.DeleteContactDetail = CatchAsyncError(async (req, res, next) => {
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.DELETE.replace("${NAME}", "CONTACT"),
+  });
+});
+
+// COUNT CONTACT
+exports.CountContacts = CatchAsyncError(async (req, res, next) => {
+  // FIND CONTACTS COUNT
+  const allContact = await CountDocument(ContactSchema);
+  const processingContact = await CountDocument(ContactSchema, { status: "Processing" });
+  const successContact = await CountDocument(ContactSchema, { status: "Success" });
+  const deniedContact = await CountDocument(ContactSchema, { status: "Denied" });
+
+  // SEND RESPONSE
+  res.status(SUCCESS).json({
+    SUCCESS: true,
+    MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "CONTACT COUNT"),
+    DATA: {
+      ALL_CONTACT: allContact,
+      PROCESSING_CONTACT: processingContact,
+      SUCCESS_CONTACT: successContact,
+      DENIED_CONTACT: deniedContact
+    },
   });
 });

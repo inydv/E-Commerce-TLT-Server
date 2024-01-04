@@ -2,14 +2,7 @@
 const Express = require("express");
 
 // IMPORT LOCAL REQUIRED FILES
-const {
-  Register,
-  Login,
-  Logout,
-  ForgotPassword,
-  ResetPassword,
-  VerifyAccount,
-} = require("../Controllers/Authentication.Controllers");
+const { Register, Login, Logout, ForgotPassword, ResetPassword, VerifyAccount } = require("../Controllers/Authentication.Controllers");
 
 // EXPRESS CONFIGS
 const Router = Express.Router();

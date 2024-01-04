@@ -6,11 +6,4 @@ const { AuthorizeRole } = require("./AuthorizeRoles.Middleware");
 const { SingleImage, MultipleImages } = require("./Cloudinary.middleware");
 
 // EXPORT
-module.exports = {
-  ValidateID,
-  Errors,
-  IsAuthenticatedUser,
-  AuthorizeRole,
-  SingleImage,
-  MultipleImages,
-};
+module.exports = { ValidateID, Errors, IsAuthenticatedUser, AuthorizeRole, SingleImage, MultipleImages };

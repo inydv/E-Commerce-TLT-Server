@@ -51,9 +51,11 @@ exports.GetAllProduct = CatchAsyncError(async (req, res, next) => {
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "PRODUCTS"),
-    DATA: products,
-    NUMBER_OF_TOTAL_PRODUCTS: totalProductsCount,
-    NUMBER_OF_FILTERED_PRODUCTS: filteredProductsCount,
+    DATA: {
+      products: products,
+      NUMBER_OF_TOTAL_PRODUCTS: totalProductsCount,
+      NUMBER_OF_FILTERED_PRODUCTS: filteredProductsCount,
+    },
   });
 });
 
@@ -80,21 +82,9 @@ exports.GetProductDetail = CatchAsyncError(async (req, res, next) => {
 // UPDATE PRODUCT REVIEW
 exports.UpdateProductReview = CatchAsyncError(async (req, res, next) => {
   // CHECK UPDATE OTHER THAN STATUS
-  if (
-    req.body.name ||
-    req.body.description ||
-    req.body.images ||
-    req.body.category ||
-    req.body.subCategories ||
-    req.body.price ||
-    req.body.quantity ||
-    req.body.ratings
-  ) {
+  if (req.body.name || req.body.description || req.body.images || req.body.category || req.body.subCategories || req.body.price || req.body.quantity || req.body.ratings) {
     return next(
-      new ErrorHandler(
-        ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN REVIEWS"),
-        UNPROCESSABLE
-      )
+      new ErrorHandler(ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN REVIEWS"), UNPROCESSABLE)
     );
   }
 

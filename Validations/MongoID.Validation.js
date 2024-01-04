@@ -7,6 +7,4 @@ const MongoID = (ID) => {
 };
 
 // EXPORT
-module.exports = {
-  MongoID,
-};
+module.exports = { MongoID };

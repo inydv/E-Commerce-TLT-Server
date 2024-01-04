@@ -3,11 +3,7 @@ const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
 const { SendToken } = require("../../../Utilities/index");
 const { Update } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
-const {
-  SUCCESS,
-  UNPROCESSABLE,
-  BAD
-} = require("../../../Constants/Status.Constant");
+const { SUCCESS, UNPROCESSABLE, BAD } = require("../../../Constants/Status.Constant");
 const { UserSchema } = require("../../../Schema/index");
 
 // GET MY INFORMATION
@@ -20,20 +16,14 @@ exports.UpdateUserInformation = CatchAsyncError(async (req, res, next) => {
   // USER CAN'T CHANGE THEIR EMAIL
   if (req.body.email || req.body.isVerified || req.body.role) {
     return next(
-      new ErrorHandler(
-        ERROR.NOT_CHANGE.replace("${NAME}", "EMAIL, VERIFICATION AND ROLE"),
-        UNPROCESSABLE
-      )
+      new ErrorHandler(ERROR.NOT_CHANGE.replace("${NAME}", "EMAIL, VERIFICATION AND ROLE"), UNPROCESSABLE)
     );
   }
 
   // USER CAN'T CHANGE THEIR ROLE
   if (req.body.role) {
     return next(
-      new ErrorHandler(
-        ERROR.NOT_CHANGE.replace("${NAME}", "ROLE"),
-        UNPROCESSABLE
-      )
+      new ErrorHandler(ERROR.NOT_CHANGE.replace("${NAME}", "ROLE"), UNPROCESSABLE)
     );
   }
 
@@ -45,20 +35,14 @@ exports.UpdateUserInformation = CatchAsyncError(async (req, res, next) => {
     // IS PASSWORD MATCHED
     if (!isPasswordMatched) {
       return next(
-        new ErrorHandler(
-          ERROR.INCORRECT.replace("${NAME}", "PASSWORD"),
-          BAD
-        )
+        new ErrorHandler(ERROR.INCORRECT.replace("${NAME}", "PASSWORD"), BAD)
       );
     }
 
     // IF PASSWORD AND CONFIRM PASSWORD IS NOT SAME
     if (req.body?.password !== req.body?.confirmPassword) {
       return next(
-        new ErrorHandler(
-          ERROR.PASSWORD_NOT_MATCH,
-          BAD
-        )
+        new ErrorHandler(ERROR.PASSWORD_NOT_MATCH, BAD)
       );
     }
   }

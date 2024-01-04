@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inydv/THE-LITTLE-THINGS.git"
+    "url": "git+https://github.com/inydv/E-Commerce-TLT-Server.git"
   },
   "keywords": [
     "e-commerce",
@@ -21,9 +21,9 @@
   "author": "inydv",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/inydv/THE-LITTLE-THINGS/issues"
+    "url": "https://github.com/inydv/E-Commerce-TLT-Server/issues"
   },
-  "homepage": "https://github.com/inydv/THE-LITTLE-THINGS#readme",
+  "homepage": "https://github.com/inydv/E-Commerce-TLT-Server#readme",
   "dependencies": {
     "cloudinary": "^1.35.0",
     "cookie-parser": "^1.4.6",

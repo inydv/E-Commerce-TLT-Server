@@ -1,1 +1,0 @@
-import{j as e,a as t}from"./index-addfd89c.js";function s({title:l}){return e("div",{className:"flex items-center justify-center flex-col gap-5",children:[t("h1",{className:"border-2 rounded-full h-16 w-16 grid place-content-center font-semibold text-4xl",children:"!"}),e("h1",{className:"text-xl sm:text-2xl",children:[l," Not Available"]})]})}export{s as N};

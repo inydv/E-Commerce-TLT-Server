@@ -36,11 +36,10 @@ const Get = async (Model, ReqBody, IsAuth = false) => {
   return Model.findOne(ReqBody);
 };
 
-// EXPORT
-module.exports = {
-  Create,
-  Update,
-  GetAll,
-  GetById,
-  Get,
+// COUNT DOCUMENT
+const CountDocument = async (Model, filter = {}) => {
+  return Model.CountDocuments(filter);
 };
+
+// EXPORT
+module.exports = { Create, Update, GetAll, GetById, Get, CountDocument };

@@ -1,11 +1,7 @@
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
 const { ProductSchema } = require("../../../Schema/index");
-const {
-  Create,
-  GetById,
-  Update,
-} = require("../../../Services/HandlerFactory.Service");
+const { Create, GetById, Update } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL } = require("../../../Constants/Messages.Constant");
 const { SUCCESS } = require("../../../Constants/Status.Constant");
 
@@ -163,5 +159,24 @@ exports.DeleteUserProductReview = CatchAsyncError(async (req, res, next) => {
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.DELETE.replace("${NAME}", "REVIEW"),
+  });
+});
+
+// COUNT PRODUCTS
+exports.CountProducts = CatchAsyncError(async (req, res, next) => {
+  // FIND PRODUCTS COUNT
+  const allProduct = await CountDocument(ProductSchema);
+  const outOfStockProduct = await CountDocument(ProductSchema, { quantity: 0 });
+  const inStockProduct = await CountDocument(ProductSchema, { role: { $ne: 0 } });
+
+  // SEND RESPONSE
+  res.status(SUCCESS).json({
+    SUCCESS: true,
+    MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "PRODUCT COUNT"),
+    DATA: {
+      ALL_PRODUCT: allProduct,
+      OUT_OF_STOCK_PRODUCT: outOfStockProduct,
+      IN_STOCK_PRODUCT: inStockProduct,
+    },
   });
 });

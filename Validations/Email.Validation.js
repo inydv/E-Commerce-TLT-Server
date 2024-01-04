@@ -22,6 +22,4 @@ function EmailValidation(Email) {
 }
 
 // EXPORT
-module.exports = {
-  EmailValidation,
-};
+module.exports = { EmailValidation, };

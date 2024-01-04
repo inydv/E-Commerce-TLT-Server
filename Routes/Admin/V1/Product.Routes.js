@@ -3,12 +3,7 @@ const Express = require("express");
 const Multer = require('multer');
 
 // IMPORT LOCAL REQUIRED FILES
-const {
-  CreateProduct,
-  UpdateProduct,
-  DeleteProduct,
-  DeleteUserProductReview,
-} = require("../../../Controllers/index");
+const { CreateProduct, UpdateProduct, DeleteProduct, DeleteUserProductReview, CountProducts } = require("../../../Controllers/index");
 const { ValidateID } = require("../../../Middlewares/index");
 const { MultipleImages } = require("../../../Middlewares/index");
 
@@ -19,6 +14,7 @@ const Router = Express.Router();
 const Upload = Multer();
 
 // ROUTES
+Router.route("/count-products").get(CountProducts);
 Router.route("/").post(Upload.array('images', 5), MultipleImages, CreateProduct);
 Router.route("/:productId")
   .put(Upload.array('images', 5), ValidateID, MultipleImages, UpdateProduct)

@@ -1,30 +1,9 @@
 // IMPORT LOCAL REQUIRED FILES
-const {
-  CatchAsyncError,
-  ErrorHandler,
-  SendEmail,
-  SendToken,
-} = require("../Utilities/index");
+const { CatchAsyncError, ErrorHandler, SendEmail, SendToken } = require("../Utilities/index");
 const { UserSchema, TokenSchema } = require("../Schema/index");
-const {
-  Create,
-  Get,
-  Update,
-  GetById,
-} = require("../Services/HandlerFactory.Service");
-const {
-  SUCCESSFUL,
-  SUBJECT,
-  TITLE,
-  ERROR,
-  VERIFICATION,
-} = require("../Constants/Messages.Constant");
-const {
-  SUCCESS,
-  UNAUTORIZE,
-  INTERNAL_SERVER_ERROR,
-  BAD
-} = require("../Constants/Status.Constant");
+const { Create, Get, Update, GetById } = require("../Services/HandlerFactory.Service");
+const { SUCCESSFUL, SUBJECT, TITLE, ERROR, VERIFICATION } = require("../Constants/Messages.Constant");
+const { SUCCESS, UNAUTORIZE, INTERNAL_SERVER_ERROR, BAD } = require("../Constants/Status.Constant");
 const { BASE_URL, ROUTES } = require("../Constants/Routes.Constant");
 
 // REGISTER

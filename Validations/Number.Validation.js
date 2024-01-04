@@ -7,6 +7,4 @@ function NumberValidation(Number, Minimum, Maximum) {
 }
 
 // EXPORT
-module.exports = {
-  NumberValidation,
-};
+module.exports = { NumberValidation };

@@ -2,12 +2,7 @@
 const Express = require("express");
 
 // IMPORT LOCAL REQUIRED FILES
-const {
-  GetAllProduct,
-  GetProductDetail,
-  UpdateProductReview,
-  DeleteProductReview,
-} = require("../../../Controllers/index");
+const { GetAllProduct, GetProductDetail, UpdateProductReview, DeleteProductReview } = require("../../../Controllers/index");
 const { ValidateID, IsAuthenticatedUser } = require("../../../Middlewares/index");
 
 // EXPRESS CONFIGS

@@ -99,8 +99,4 @@ UserRoutes.forEach((route) => {
 AdminRoutes.forEach((route) => AdminRouter.use(route.Path, route.Route));
 
 // EXPORT
-module.exports = {
-  AuthRouter,
-  UserRouter,
-  AdminRouter,
-};
+module.exports = { AuthRouter, UserRouter, AdminRouter };

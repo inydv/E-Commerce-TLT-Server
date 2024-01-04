@@ -5,9 +5,4 @@ const SendEmail = require("./SendMail");
 const SendToken = require("./SendToken");
 
 // EXPORT
-module.exports = {
-  ErrorHandler,
-  CatchAsyncError,
-  SendEmail,
-  SendToken,
-};
+module.exports = { ErrorHandler, CatchAsyncError, SendEmail, SendToken };

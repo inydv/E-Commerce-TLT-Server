@@ -7,11 +7,4 @@ const TokenSchema = require("./Token.Schema");
 const UserSchema = require("./User.Schema");
 
 // EXPORT
-module.exports = {
-  CartSchema,
-  ContactSchema,
-  OrderSchema,
-  ProductSchema,
-  TokenSchema,
-  UserSchema,
-};
+module.exports = { CartSchema, ContactSchema, OrderSchema, ProductSchema, TokenSchema, UserSchema };

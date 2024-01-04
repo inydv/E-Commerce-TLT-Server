@@ -55,7 +55,6 @@ const UserSchema = new Mongoose.Schema({
     type: Boolean,
     required: [true, "Invalid Verification"],
     default: false,
-    select: false,
   },
   createdAt: {
     type: Date,

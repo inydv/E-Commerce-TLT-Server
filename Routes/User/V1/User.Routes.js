@@ -3,10 +3,7 @@ const Express = require("express");
 const Multer = require('multer');
 
 // IMPORT LOCAL REQUIRED FILES
-const {
-  GetMyInformation,
-  UpdateUserInformation,
-} = require("../../../Controllers/index");
+const { GetMyInformation, UpdateUserInformation } = require("../../../Controllers/index");
 const { SingleImage } = require("../../../Middlewares/index");
 
 // EXPRESS CONFIGS

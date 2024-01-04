@@ -5,10 +5,7 @@ const Mongoose = require("mongoose");
 const { SUCCESSFUL } = require("../Constants/Messages.Constant");
 
 // REPLACE PASSWORD IN MONGO URL
-const DB = process.env.DATABASE.replace(
-  "<PASSWORD>",
-  process.env.DATABASE_PASSWORD
-);
+const DB = process.env.DATABASE.replace("<PASSWORD>", process.env.DATABASE_PASSWORD);
 
 // CONNECT TO DATABASE
 const connectDatabase = () => {
@@ -18,9 +15,7 @@ const connectDatabase = () => {
     useUnifiedTopology: true,
   })
     .then((data) => {
-      console.log(
-        SUCCESSFUL.MONGODB.replace("${CONNECTION_HOST}", data.connection.host)
-      );
+      console.log(SUCCESSFUL.MONGODB.replace("${CONNECTION_HOST}", data.connection.host));
     })
     .catch((err) => console.log(err));
 };

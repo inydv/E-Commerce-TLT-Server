@@ -18,6 +18,4 @@ const ValidateID = CatchAsyncError(async (req, res, next) => {
 });
 
 // EXPORTS
-module.exports = {
-  ValidateID,
-};
+module.exports = { ValidateID };

@@ -3,25 +3,16 @@ const Cloudinary = require("cloudinary");
 
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
-const {
-  Update,
-  GetById,
-  GetAll,
-} = require("../../../Services/HandlerFactory.Service");
+const { Update, GetById, GetAll } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
-const {
-  SUCCESS,
-  UNPROCESSABLE,
-  BAD,
-  INTERNAL_SERVER_ERROR,
-} = require("../../../Constants/Status.Constant");
+const { SUCCESS, UNPROCESSABLE, BAD, INTERNAL_SERVER_ERROR } = require("../../../Constants/Status.Constant");
 const { UserSchema } = require("../../../Schema/index");
 
 // GET ALL USERS
 exports.GetAllUsers = CatchAsyncError(async (req, res, next) => {
   // FIND ALL USERS
   const users = await GetAll(UserSchema, {
-    role: "User"
+    role: { $ne: "Admin" }
   });
 
   // IF USERS NOT FOUND
@@ -62,20 +53,9 @@ exports.GetUserDetail = CatchAsyncError(async (req, res, next) => {
 // UPDATE USER ROLE
 exports.UpdateUserRole = CatchAsyncError(async (req, res, next) => {
   // CHECK UPDATE OTHER THAN ROLE
-  if (
-    req.body.username ||
-    req.body.email ||
-    req.body.password ||
-    req.body.phone ||
-    req.body.avatar ||
-    req.body.gender ||
-    req.body.isVerified
-  ) {
+  if (req.body.username || req.body.email || req.body.password || req.body.phone || req.body.avatar || req.body.gender || req.body.isVerified) {
     return next(
-      new ErrorHandler(
-        ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN ROLE"),
-        UNPROCESSABLE
-      )
+      new ErrorHandler(ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN ROLE"), UNPROCESSABLE)
     );
   }
 
@@ -119,5 +99,26 @@ exports.DeleteUser = CatchAsyncError(async (req, res, next) => {
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.DELETE.replace("${NAME}", "USER"),
+  });
+});
+
+// COUNT USER
+exports.CountUsers = CatchAsyncError(async (req, res, next) => {
+  // FIND USERS COUNT
+  const allAccount = await CountDocument(UserSchema);
+  const sellerAccount = await CountDocument(UserSchema, { role: "Seller" });
+  const userAccount = await CountDocument(UserSchema, { role: "User" });
+  const unVerifiedAccount = await CountDocument(UserSchema, { isVerified: false });
+
+  // SEND RESPONSE
+  res.status(SUCCESS).json({
+    SUCCESS: true,
+    MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "USER COUNT"),
+    DATA: {
+      ALL_ACCOUNT: allAccount,
+      SELLER_ACCOUNT: sellerAccount,
+      USER_ACCOUNT: userAccount,
+      UNVERIFIED_ACCOUNT: unVerifiedAccount
+    },
   });
 });
