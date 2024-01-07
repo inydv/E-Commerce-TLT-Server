@@ -29,9 +29,6 @@ exports.GetAllProduct = CatchAsyncError(async (req, res, next) => {
     }
   });
 
-  // COUNT TOTAL PRODUCTS
-  const totalProductsCount = await ProductSchema.countDocuments();
-
   // CALLING SERVICE FOR FILTER
   const apiFeature = new ProductFeatures(ProductSchema.find(), filter).filter();
 
@@ -39,10 +36,10 @@ exports.GetAllProduct = CatchAsyncError(async (req, res, next) => {
   let products = await apiFeature.query;
 
   // COUNT FILTERED PRODUCTS
-  let filteredProductsCount = products.length;
+  const filteredProductsCount = products.length;
 
   // CALLING SERVICE FOR PAGINATION AND SORTING
-  apiFeature.pagination(8).sorting();
+  apiFeature.pagination(req.query?.resultPerPage || 8).sorting();
 
   // CLONE THE FIND METHOD
   products = await apiFeature.query.clone();
@@ -52,9 +49,8 @@ exports.GetAllProduct = CatchAsyncError(async (req, res, next) => {
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "PRODUCTS"),
     DATA: {
-      products: products,
-      NUMBER_OF_TOTAL_PRODUCTS: totalProductsCount,
-      NUMBER_OF_FILTERED_PRODUCTS: filteredProductsCount,
+      LISTS: products,
+      NUMBER_OF_FILTERED_LIST: filteredProductsCount,
     },
   });
 });

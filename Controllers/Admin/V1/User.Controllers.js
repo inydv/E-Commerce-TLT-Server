@@ -3,7 +3,7 @@ const Cloudinary = require("cloudinary");
 
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
-const { Update, GetById, GetAll } = require("../../../Services/HandlerFactory.Service");
+const { Update, GetById, CountDocument, GetUsingPagination } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
 const { SUCCESS, UNPROCESSABLE, BAD, INTERNAL_SERVER_ERROR } = require("../../../Constants/Status.Constant");
 const { UserSchema } = require("../../../Schema/index");
@@ -11,9 +11,9 @@ const { UserSchema } = require("../../../Schema/index");
 // GET ALL USERS
 exports.GetAllUsers = CatchAsyncError(async (req, res, next) => {
   // FIND ALL USERS
-  const users = await GetAll(UserSchema, {
+  const users = await GetUsingPagination(UserSchema, {
     role: { $ne: "Admin" }
-  });
+  }, req.query);
 
   // IF USERS NOT FOUND
   if (!users) {
@@ -22,11 +22,17 @@ exports.GetAllUsers = CatchAsyncError(async (req, res, next) => {
     );
   }
 
+  // COUNT FILTERED CONTACTS
+  const filteredUsersCount = users.length;
+
   // SEND RESPONSE
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "USERS"),
-    DATA: users,
+    DATA: {
+      LISTS: users,
+      NUMBER_OF_FILTERED_LIST: filteredUsersCount,
+    },
   });
 });
 
@@ -105,7 +111,7 @@ exports.DeleteUser = CatchAsyncError(async (req, res, next) => {
 // COUNT USER
 exports.CountUsers = CatchAsyncError(async (req, res, next) => {
   // FIND USERS COUNT
-  const allAccount = await CountDocument(UserSchema);
+  const allAccount = await CountDocument(UserSchema, { role: { $ne: "Admin" } });
   const sellerAccount = await CountDocument(UserSchema, { role: "Seller" });
   const userAccount = await CountDocument(UserSchema, { role: "User" });
   const unVerifiedAccount = await CountDocument(UserSchema, { isVerified: false });

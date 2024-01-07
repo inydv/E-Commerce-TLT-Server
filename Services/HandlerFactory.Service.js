@@ -38,8 +38,22 @@ const Get = async (Model, ReqBody, IsAuth = false) => {
 
 // COUNT DOCUMENT
 const CountDocument = async (Model, filter = {}) => {
-  return Model.CountDocuments(filter);
+  return Model.countDocuments(filter);
 };
 
+// GET USING PAGINATION
+const GetUsingPagination = async (Model, filter = {}, query) => {
+  // DESTRUCTURING THE FILTER
+  const { page, resultPerPage } = query;
+
+  // CURRENT PAGE
+  const currentPage = Number(page) || 1;
+
+  // HOW MANY PRODUCT SHOULD BE SKIPPED
+  const skip = resultPerPage * (currentPage - 1);
+
+  return Model.find(filter).limit(resultPerPage).skip(skip);
+}
+
 // EXPORT
-module.exports = { Create, Update, GetAll, GetById, Get, CountDocument };
+module.exports = { Create, Update, GetAll, GetById, Get, CountDocument, GetUsingPagination };

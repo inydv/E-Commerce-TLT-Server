@@ -1,6 +1,6 @@
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
-const { GetById, GetAll, CountDocument } = require("../../../Services/HandlerFactory.Service");
+const { GetById, CountDocument, GetUsingPagination } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
 const { SUCCESS, UNPROCESSABLE, BAD } = require("../../../Constants/Status.Constant");
 const { OrderSchema, ProductSchema } = require("../../../Schema/index");
@@ -27,7 +27,7 @@ async function UpdateStock(id, quantity, next) {
 // GET ALL ORDERS
 exports.GetAllOrders = CatchAsyncError(async (req, res, next) => {
   // FIND ALL ORDERS
-  const orders = await GetAll(OrderSchema);
+  const orders = await GetUsingPagination(OrderSchema, {}, req.query);
 
   // IF ORDERS NOT FOUND
   if (!orders) {
@@ -36,11 +36,17 @@ exports.GetAllOrders = CatchAsyncError(async (req, res, next) => {
     );
   }
 
+  // COUNT FILTERED ORDERS
+  const filteredOrdersCount = orders.length;
+
   // SEND RESPONSE
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "ORDERS"),
-    DATA: orders,
+    DATA: {
+      LISTS: orders,
+      NUMBER_OF_FILTERED_LIST: filteredOrdersCount,
+    },
   });
 });
 

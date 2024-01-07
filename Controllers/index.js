@@ -2,7 +2,7 @@
 const { Register, Login, Logout, ForgotPassword, ResetPassword, VerifyAccount } = require("./Authentication.Controllers");
 
 // IMPORT REQUIRED CONTROLLERS -- USER
-const { UpdateCart } = require("./User/V1/Cart.Controllers");
+const { GetCart, UpdateCart } = require("./User/V1/Cart.Controllers");
 const { CreateContact } = require("./User/V1/Contact.Controllers");
 const { GetMyOrders, GetOrderDetail } = require("./User/V1/Order.Controllers");
 const { RazorpayCreateOrder, GetKeyID, PaymentVerification } = require("./User/V1/Payment.Controller");
@@ -16,4 +16,4 @@ const { CreateProduct, DeleteProduct, UpdateProduct, DeleteUserProductReview, Co
 const { DeleteUser, GetAllUsers, GetUserDetail, UpdateUserRole, CountUsers } = require("./Admin/V1/User.Controllers");
 
 // EXPORT
-module.exports = { Register, Login, Logout, ForgotPassword, ResetPassword, VerifyAccount, UpdateCart, CreateContact, GetMyOrders, GetOrderDetail, RazorpayCreateOrder, GetKeyID, PaymentVerification, DeleteProductReview, GetAllProduct, GetProductDetail, UpdateProductReview, GetMyInformation, UpdateUserInformation, DeleteContactDetail, GetAllContacts, GetContactDetail, UpdateContactStatus, CountContacts, DeleteOrder, GetAllOrders, UpdateOrderStatus, CountOrders, CreateProduct, DeleteProduct, UpdateProduct, DeleteUserProductReview, CountProducts, DeleteUser, GetAllUsers, GetUserDetail, UpdateUserRole, CountUsers };
+module.exports = { Register, Login, Logout, ForgotPassword, ResetPassword, VerifyAccount, GetCart, UpdateCart, CreateContact, GetMyOrders, GetOrderDetail, RazorpayCreateOrder, GetKeyID, PaymentVerification, DeleteProductReview, GetAllProduct, GetProductDetail, UpdateProductReview, GetMyInformation, UpdateUserInformation, DeleteContactDetail, GetAllContacts, GetContactDetail, UpdateContactStatus, CountContacts, DeleteOrder, GetAllOrders, UpdateOrderStatus, CountOrders, CreateProduct, DeleteProduct, UpdateProduct, DeleteUserProductReview, CountProducts, DeleteUser, GetAllUsers, GetUserDetail, UpdateUserRole, CountUsers };

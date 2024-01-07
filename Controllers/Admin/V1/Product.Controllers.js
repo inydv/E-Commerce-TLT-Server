@@ -1,7 +1,7 @@
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
 const { ProductSchema } = require("../../../Schema/index");
-const { Create, GetById, Update } = require("../../../Services/HandlerFactory.Service");
+const { Create, GetById, Update, CountDocument } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL } = require("../../../Constants/Messages.Constant");
 const { SUCCESS } = require("../../../Constants/Status.Constant");
 

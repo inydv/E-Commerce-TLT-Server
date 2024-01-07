@@ -1,6 +1,6 @@
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
-const { Update, GetById, GetAll } = require("../../../Services/HandlerFactory.Service");
+const { Update, GetById, CountDocument, GetUsingPagination } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL, ERROR } = require("../../../Constants/Messages.Constant");
 const { SUCCESS, UNPROCESSABLE, BAD } = require("../../../Constants/Status.Constant");
 const { ContactSchema } = require("../../../Schema/index");
@@ -8,20 +8,26 @@ const { ContactSchema } = require("../../../Schema/index");
 // GET ALL CONTACTS
 exports.GetAllContacts = CatchAsyncError(async (req, res, next) => {
   // FIND ALL CONTACTS
-  const contacts = await GetAll(ContactSchema);
+  const contacts = await GetUsingPagination(ContactSchema, {}, req.query);
 
   // IF CONTACTS NOT FOUND
   if (!contacts) {
     return next(
-      new ErrorHandler(ERROR.NOT_FOUND.replace("${NAME}", "USERS"), BAD)
+      new ErrorHandler(ERROR.NOT_FOUND.replace("${NAME}", "CONTACTS"), BAD)
     );
   }
+
+  // COUNT FILTERED CONTACTS
+  const filteredContactsCount = contacts.length;
 
   // SEND RESPONSE
   res.status(SUCCESS).json({
     SUCCESS: true,
     MESSAGE: SUCCESSFUL.GET.replace("${NAME}", "CONTACT"),
-    DATA: contacts,
+    DATA: {
+      LISTS: contacts,
+      NUMBER_OF_FILTERED_LIST: filteredContactsCount,
+    },
   });
 });
 
