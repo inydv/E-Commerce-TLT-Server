@@ -49,7 +49,7 @@ const Server = App.listen(Port, () => {
 });
 
 // UNHANDLED PROMISE REJECTION OF DATABASE
-if (process.env.MODE === "PRODUCTION") {
+if (process.env.NODE_ENV === "PRODUCTION") {
   process.on("unhandledRejection", (err) => {
     console.log(`Error Name: ${err.name}`);
     console.log(`Error Message: ${err.message}`);
