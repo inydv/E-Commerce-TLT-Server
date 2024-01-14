@@ -2,7 +2,7 @@
 module.exports = {
   // CORS CONFIGURATION
   CORS: {
-    ORIGIN: "http://localhost:5173",
+    ORIGIN: "http://localhost:5173, https://snappy-era-riak.onrender.com/",
     METHODS: "DELETE,GET,PATCH,POST,PUT",
   },
 
