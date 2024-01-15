@@ -41,10 +41,7 @@ exports.Register = CatchAsyncError(async (req, res, next) => {
     // SEND RESPONSE
     res.status(SUCCESS).json({
       SUCCESS: true,
-      MESSAGE: SUCCESSFUL.EMAIL_SENT.replace(
-        "${EMAIL}",
-        user.email.toUpperCase()
-      ),
+      MESSAGE: SUCCESSFUL.EMAIL_SENT
     });
   } catch (error) {
     // HANDLE ERROR
@@ -167,9 +164,7 @@ exports.ForgotPassword = CatchAsyncError(async (req, res, next) => {
     req.protocol +
     "://" +
     req.get("host") +
-    BASE_URL.AUTHENTICATION +
-    ROUTES.AUTH +
-    "/authentication" +
+    "/reset-password/" +
     token.token;
 
   try {
@@ -185,10 +180,7 @@ exports.ForgotPassword = CatchAsyncError(async (req, res, next) => {
     // SEND RESPONSE
     res.status(SUCCESS).json({
       SUCCESS: true,
-      MESSAGE: SUCCESSFUL.EMAIL_SENT.replace(
-        "${EMAIL}",
-        user.email.toUpperCase()
-      ),
+      MESSAGE: SUCCESSFUL.EMAIL_SENT
     });
   } catch (error) {
     // HANDLE ERROR
