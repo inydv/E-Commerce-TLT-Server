@@ -36,6 +36,7 @@ exports.Register = CatchAsyncError(async (req, res, next) => {
       Subject_1: SUBJECT.VERIFICATION_ACCOUNT_1,
       Subject_2: SUBJECT.VERIFICATION_ACCOUNT_2,
       Link: verificationLink,
+      button_text: 'Verify Now'
     });
 
     // SEND RESPONSE
@@ -175,6 +176,7 @@ exports.ForgotPassword = CatchAsyncError(async (req, res, next) => {
       Subject_1: SUBJECT.RESET_PASSWORD_1,
       Subject_2: SUBJECT.RESET_PASSWORD_2,
       Link: ResetLink,
+      button_text: 'Reset'
     });
 
     // SEND RESPONSE

@@ -48,12 +48,12 @@ const mongoSanitize = require('express-mongo-sanitize');
 App.use(mongoSanitize());
 
 // APP USE JSON FORMAT
-App.use(Express.json({ limit: '15kb' }));
-App.use(Express.urlencoded({ limit: '1mb', extended: true }));
+App.use(Express.json({ limit: '50kb' }));
+App.use(Express.urlencoded({ limit: '50mb', extended: true }));
 
 // PARSER CONFIGS
 App.use(CookieParser());
-App.use(BodyParser.urlencoded({ extended: true }));
+App.use(BodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // CORS
 App.use(

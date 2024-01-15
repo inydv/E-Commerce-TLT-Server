@@ -35,7 +35,7 @@ App.use(FileUpload());
 
 // USE BUILD INDEX.JS
 App.use(Express.static(Path.join(__dirname, "dist")));
-App.get("/", (req, res) => {
+App.get("*", (req, res) => {
   res.sendFile('index.html', { root: Path.join(__dirname, 'dist') });
 })
 

@@ -4,7 +4,7 @@ const EJS = require("ejs");
 const Path = require("path");
 
 // EXPORT SEND EMAIL
-module.exports = async ({ Title, Email, Subject_1, Subject_2, Link }) => {
+module.exports = async ({ Title, Email, Subject_1, Subject_2, Link, button_text }) => {
   // CREATE TRANSPORTER
   const Transporter = NodeMailer.createTransport({
     host: process.env.EMAIL_HOST,
@@ -25,6 +25,7 @@ module.exports = async ({ Title, Email, Subject_1, Subject_2, Link }) => {
     Subject_1: Subject_1,
     Subject_2: Subject_2,
     Link: Link,
+    button_text: button_text
   });
 
   // LOGO PATH

@@ -6,6 +6,16 @@ const Path = require("path");
 // CREATE PARSER
 const Parser = new DatauriParser();
 
+// CLOUDINARY CONSTANT
+const CLOUDINARY_CONSTANT = {
+  width: 350,
+  height: 350,
+  quality: "auto:good",
+  fetch_format: "avif",
+  effect: "auto_contrast",
+  gravity: "auto",
+}
+
 // HANDLE SINGLE IMAGE
 const SingleImage = async (req, res, next) => {
   // CHECK USER CHANGE IMAGE OR NOT
@@ -24,8 +34,8 @@ const SingleImage = async (req, res, next) => {
     // UPLOAD NEW IMAGE
     const newImage = await Cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "Avatars",
-      // width: 250,
       crop: "scale",
+      ...CLOUDINARY_CONSTANT
     });
 
     // SEND TO REQUEST BODY AVATAR
@@ -54,6 +64,7 @@ const MultipleImages = async (req, res, next) => {
       // UPLOAD IMAGE
       const result = await Cloudinary.v2.uploader.upload(file64.content, {
         folder: "Products",
+        ...CLOUDINARY_CONSTANT
       });
 
       // PUSH INTO VARIABLE IMAGES
