@@ -1,0 +1,1 @@
+import{b as e,j as l}from"./index-71041327.js";function a({title:t}){return e("section",{className:"flex items-center justify-center flex-col gap-5",children:[l("h1",{className:"border-2 rounded-full h-16 w-16 grid place-content-center font-semibold text-4xl",children:"!"}),e("h1",{className:"text-xl sm:text-2xl",children:[t," Not Available"]})]})}export{a as default};
