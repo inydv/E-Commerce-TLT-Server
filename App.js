@@ -29,7 +29,7 @@ App.use(helmet({
     directives: {
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
       "img-src": ["'self'", "data: https://res.cloudinary.com"],
-      "script-src": ["'self'"],
+      "script-src": ["'self'", "https://checkout.razorpay.com"],
       "default-src": ["'self'"]
     },
   },

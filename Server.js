@@ -35,9 +35,19 @@ App.use(FileUpload());
 
 // USE BUILD INDEX.JS
 App.use(Express.static(Path.join(__dirname, "dist")));
-App.get("*", (req, res) => {
-  res.sendFile('index.html', { root: Path.join(__dirname, 'dist') });
-})
+// App.get("*", (req, res) => {
+//   res.sendFile('index.html', { root: Path.join(__dirname, 'dist') });
+// })
+
+App.use((req, res, next) => {
+  // FOR NON-API ROUTES, SEND THE "index.html" FILE
+  if (!req.originalUrl.startsWith('/api/v1')) {
+    return res.sendFile('index.html', { root: Path.join(__dirname, 'dist') });
+  }
+
+  // FOR API ROUTES, CONTINUE TO THE NEXT MIDDLEWARE
+  next();
+});
 
 // CONNECTING TO DATABASE
 ConnectDatabase();
