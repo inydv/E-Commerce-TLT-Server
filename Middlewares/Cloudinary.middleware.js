@@ -1,10 +1,9 @@
 // IMPORT REQUIRED PACKAGE
 const Cloudinary = require("cloudinary");
-const DatauriParser = require("datauri/parser");
-const Path = require("path");
 
-// CREATE PARSER
-const Parser = new DatauriParser();
+// IMPORT LOCAL REQUIRED FILES
+const { ErrorHandler } = require("../Utilities");
+const { INTERNAL_SERVER_ERROR } = require("../Constants/Status.Constant");
 
 // CLOUDINARY CONSTANT
 const CLOUDINARY_CONSTANT = {
@@ -14,6 +13,7 @@ const CLOUDINARY_CONSTANT = {
   fetch_format: "avif",
   effect: "auto_contrast",
   gravity: "auto",
+  crop: "fill",
 }
 
 // HANDLE SINGLE IMAGE
@@ -31,18 +31,22 @@ const SingleImage = async (req, res, next) => {
       }
     }
 
-    // UPLOAD NEW IMAGE
-    const newImage = await Cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "Avatars",
-      crop: "scale",
-      ...CLOUDINARY_CONSTANT
-    });
+    try {
+      // UPLOAD NEW IMAGE
+      const newImage = await Cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder: "Avatars",
+        ...CLOUDINARY_CONSTANT
+      });
 
-    // SEND TO REQUEST BODY AVATAR
-    req.body.avatar = {
-      public_id: newImage.public_id,
-      url: newImage.url,
-    };
+      // SEND TO REQUEST BODY AVATAR
+      req.body.avatar = {
+        public_id: newImage.public_id,
+        url: newImage.url,
+      };
+    } catch (error) {
+      // HANDLE ERROR
+      return next(new ErrorHandler(error.message, INTERNAL_SERVER_ERROR));
+    }
   }
 
   // NEXT
@@ -52,26 +56,32 @@ const SingleImage = async (req, res, next) => {
 // HANDLE MULTIPLE IMAGES
 const MultipleImages = async (req, res, next) => {
   // CHECK REQUEST BODY CONTAIN IMAGE OR NOT
-  if (req?.files) {
+  if (req.body.images) {
+    // PARSE THE ARRAY OF IMAGES
+    req.body.images = JSON.parse(req.body.images);
+
     const images = [];
 
     // ITRATE IN REQUESTED BODY IMAGES
-    for (let i = 0; i < req?.files.length; i++) {
-      // PARSING THE IMAGE
-      const extName = Path.extname(req?.files[i]?.originalname).toString();
-      const file64 = Parser.format(extName, req?.files[i]?.buffer);
+    for (let i = 0; i < req.body.images.length; i++) {
+      try {
+        if (typeof req.body.images[i] === "string") {
+          // UPLOAD IMAGE
+          const result = await Cloudinary.v2.uploader.upload(req.body.images[i], {
+            folder: "Products",
+            ...CLOUDINARY_CONSTANT
+          });
 
-      // UPLOAD IMAGE
-      const result = await Cloudinary.v2.uploader.upload(file64.content, {
-        folder: "Products",
-        ...CLOUDINARY_CONSTANT
-      });
-
-      // PUSH INTO VARIABLE IMAGES
-      images.push({
-        public_id: result.public_id,
-        url: result.secure_url,
-      });
+          // PUSH INTO VARIABLE IMAGES
+          images.push({
+            public_id: result.public_id,
+            url: result.secure_url,
+          });
+        }
+      } catch (error) {
+        // HANDLE ERROR
+        return next(new ErrorHandler(error.message, INTERNAL_SERVER_ERROR));
+      }
     }
 
     // SEND TO REQUEST BODY IMAGES

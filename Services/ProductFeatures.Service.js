@@ -9,7 +9,7 @@ class ApiFeatures {
   // FILTER
   filter() {
     // DESTRUCTURING THE QUERY STRING
-    const { name, category, subCategories, price, ratings } = this.queryStr;
+    const { name, category, subCategories, price, ratings, created_by } = this.queryStr;
 
     // VARIABLES
     let priceString, ratingString;
@@ -59,6 +59,10 @@ class ApiFeatures {
       // RATING
       ...(ratings && {
         ratings: JSON.parse(ratingString),
+      }),
+      // CREATED BY
+      ...(created_by && {
+        created_by: created_by,
       }),
     };
 

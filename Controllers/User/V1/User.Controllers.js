@@ -47,6 +47,11 @@ exports.UpdateUserInformation = CatchAsyncError(async (req, res, next) => {
     }
   }
 
+  // IF GENDER IS EMPTY THEN REMOVE GENDER
+  if (!req.body?.gender) {
+    delete req.body?.gender;
+  }
+
   // UPDATE USER
   const user = await Update(UserSchema, req.user._id, req.body);
 

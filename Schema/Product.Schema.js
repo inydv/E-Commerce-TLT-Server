@@ -69,6 +69,10 @@ const ProductSchema = new Mongoose.Schema(
         },
       },
     ],
+    created_by: {
+      type: Mongoose.Schema.ObjectId,
+      ref: "UserSchema"
+    }
   },
   {
     timestamps: true,

@@ -10,7 +10,9 @@ const { SingleImage } = require("../../../Middlewares/index");
 const Router = Express.Router();
 
 // CONFIGURE MULTER TO HANDLE MULTIPART/FORM-DATA
-const Upload = Multer();
+const Upload = Multer({
+    limits: { fieldSize: 25 * 1024 * 1024 }
+});
 
 // ROUTES
 Router.route("/me").get(GetMyInformation);

@@ -1,9 +1,12 @@
+// IMPORT REQUIRED PACKAGES
+const Cloudinary = require("cloudinary");
+
 // IMPORT LOCAL REQUIRED FILES
 const { CatchAsyncError, ErrorHandler } = require("../../../Utilities/index");
 const { ProductSchema } = require("../../../Schema/index");
 const { Create, GetById, Update, CountDocument } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL } = require("../../../Constants/Messages.Constant");
-const { SUCCESS } = require("../../../Constants/Status.Constant");
+const { SUCCESS, INTERNAL_SERVER_ERROR } = require("../../../Constants/Status.Constant");
 
 // CLOUDINARY DELETE FUNCTION
 async function DeleteFromCloud(images, next) {
@@ -11,7 +14,7 @@ async function DeleteFromCloud(images, next) {
   for (let i = 0; i < images.length; i++) {
     try {
       // REMOVE PRODUCT IMAGE FROM DATABASE
-      await cloudinary.v2.uploader.destroy(images[i].public_id);
+      await Cloudinary.v2.uploader.destroy(images[i].public_id);
     } catch (error) {
       // HANDLE ERROR
       return next(new ErrorHandler(error.message, INTERNAL_SERVER_ERROR));
@@ -48,34 +51,11 @@ exports.UpdateProduct = CatchAsyncError(async (req, res, next) => {
   }
 
   // IF REQUEST CONTAIN IMAGES
-  if (req.body.images) {
-    try {
-      // REMOVE PRODUCT IMAGE FROM CLOUD
-      DeleteFromCloud(product.images, next);
-
-      // ADD PRODUCT IMAGE IN CLOUD
-      let images = [];
-
-      // ITRATE IN REQUEST IMAGES
-      for (let i = 0; i < req.body.images.length; i++) {
-        // UPLOAD IMAGE
-        const image = await cloudinary.v2.uploader.upload(req.body.images[i], {
-          folder: "Products",
-        });
-
-        // PUSH IMAGE IN VARIABLE
-        images.push({
-          public_id: image.public_id,
-          url: image.secure_url,
-        });
-      }
-    } catch (error) {
-      // HANDLE ERROR
-      return next(new ErrorHandler(error.message, INTERNAL_SERVER_ERROR));
-    }
-
-    // PASS TO REQUEST BODY IMAGES
-    req.body.images = image;
+  if (req.body.images?.length > 0) {
+    // REMOVE PRODUCT IMAGE FROM CLOUD
+    DeleteFromCloud(product.images, next);
+  } else {
+    req.body.images = product.images;
   }
 
   // FIND CONTACT AND UPDATE

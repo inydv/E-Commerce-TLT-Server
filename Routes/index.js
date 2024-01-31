@@ -84,7 +84,7 @@ const AdminRoutes = [
 ];
 
 // ROUTES CONFIG
-AdminRouter.use(IsAuthenticatedUser, AuthorizeRole("Admin"));
+// AdminRouter.use(IsAuthenticatedUser, AuthorizeRole("Admin"));
 
 // USING THE ROUTES
 AuthRoute.forEach((route) => AuthRouter.use(route.Path, route.Route));
@@ -96,7 +96,15 @@ UserRoutes.forEach((route) => {
     UserRouter.use(route.Path, IsAuthenticatedUser, route.Route);
   }
 });
-AdminRoutes.forEach((route) => AdminRouter.use(route.Path, route.Route));
+AdminRoutes.forEach((route) => {
+  // IF ROUTE IS PRODUCT THEN ADD SELLER ACCOUNT ALSO
+  if (route.Path === ROUTES.PRODUCT) {
+    AdminRouter.use(route.Path, IsAuthenticatedUser, AuthorizeRole("Admin", "Seller"), route.Route);
+  } else {
+    AdminRouter.use(route.Path, IsAuthenticatedUser, AuthorizeRole("Admin"), route.Route);
+  }
+});
+// AdminRoutes.forEach((route) => AdminRouter.use(route.Path, route.Route));
 
 // EXPORT
 module.exports = { AuthRouter, UserRouter, AdminRouter };
