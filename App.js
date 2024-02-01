@@ -30,6 +30,7 @@ App.use(helmet({
       ...helmet.contentSecurityPolicy.getDefaultDirectives(),
       "img-src": ["'self'", "data: https://res.cloudinary.com"],
       "script-src": ["'self'", "https://checkout.razorpay.com"],
+      "frame-src": ["'self'", "https://api.razorpay.com"],
       "default-src": ["'self'"]
     },
   },
@@ -68,7 +69,7 @@ App.use(
 // DDoS ATTACK - USED TO LIMIT IP ADDRESS FROM MAKING REPEATED REQUESTS TO API ENDPOINTS
 const apiLimiter = require('express-rate-limit').rateLimit({
   windowMS: 1 * 60 * 1000,  // 1 MINUTE
-  max: 20
+  max: 30
 });
 
 // SET VIEW ENGINE
