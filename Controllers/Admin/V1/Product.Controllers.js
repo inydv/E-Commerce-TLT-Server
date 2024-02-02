@@ -7,6 +7,7 @@ const { ProductSchema } = require("../../../Schema/index");
 const { Create, GetById, Update, CountDocument } = require("../../../Services/HandlerFactory.Service");
 const { SUCCESSFUL } = require("../../../Constants/Messages.Constant");
 const { SUCCESS, INTERNAL_SERVER_ERROR } = require("../../../Constants/Status.Constant");
+const { MultipleImages } = require("../../../Middlewares/Cloudinary.middleware");
 
 // CLOUDINARY DELETE FUNCTION
 async function DeleteFromCloud(images, next) {

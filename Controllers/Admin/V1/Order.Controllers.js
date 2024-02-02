@@ -70,14 +70,14 @@ exports.UpdateOrderStatus = CatchAsyncError(async (req, res, next) => {
   }
 
   // IF ORDER IS ALREADY CANCELLED
-  if (order.orderStatus === "Cancelled") {
+  if (order.status === "Cancelled") {
     return next(
       new ErrorHandler(ERROR.ORDER.replace("${NAME}", "CANCELLED"), UNPROCESSABLE)
     );
   }
 
   // IF ORDER IS ALREADY DELIVERED
-  if (order.orderStatus === "Delivered") {
+  if (order.status === "Delivered") {
     return next(
       new ErrorHandler(
         ERROR.ORDER.replace("${NAME}", "DELIVERED"),
@@ -88,8 +88,8 @@ exports.UpdateOrderStatus = CatchAsyncError(async (req, res, next) => {
 
   // IF ORDER IS SHIPPED THEN WE CAN'T BACK TO PROCESSING
   if (
-    order.orderStatus === "Shipped" &&
-    req.body.orderStatus === "Processing"
+    order.status === "Shipped" &&
+    req.body.status === "Processing"
   ) {
     return next(
       new ErrorHandler(ERROR.ORDER.replace("${NAME}", "SHIPPED"), UNPROCESSABLE)
@@ -97,17 +97,17 @@ exports.UpdateOrderStatus = CatchAsyncError(async (req, res, next) => {
   }
 
   // IF ORDER IS GOING TO SHIPPED
-  if (req.body.orderStatus === "Shipped") {
+  if (req.body.status === "Shipped") {
     order.orderItems.forEach(async (o) => {
       await UpdateStock(o.product, o.quantity, next);
     });
   }
 
   // CHANGE PRDER STATUS
-  order.orderStatus = req.body.orderStatus;
+  order.status = req.body.status;
 
   // IF ORDER IS GOING TO DELIVERED
-  if (req.body.orderStatus === "Delivered") {
+  if (req.body.status === "Delivered") {
     order.deliveredAt = Date.now();
   }
 

@@ -12,7 +12,7 @@ const Router = Express.Router();
 
 // CONFIGURE MULTER TO HANDLE MULTIPART/FORM-DATA
 const Upload = Multer({
-  limits: { fieldSize: 25 * 1024 * 1024 }
+  limits: { fieldSize: 50 * 1024 * 1024 }
 });
 
 // ROUTES

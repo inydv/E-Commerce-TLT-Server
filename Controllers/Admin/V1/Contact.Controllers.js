@@ -53,16 +53,10 @@ exports.GetContactDetail = CatchAsyncError(async (req, res, next) => {
 
 // UPDATE CONTACT STATUS
 exports.UpdateContactStatus = CatchAsyncError(async (req, res, next) => {
-  // CHECK UPDATE OTHER THAN STATUS
-  if (req.body.firstname || req.body.lastname || req.body.email || req.body.subject || req.body.message || req.body.user) {
-    return next(
-      new ErrorHandler(
-        ERROR.NOT_CHANGE.replace("${NAME}", "INFORMATION OTHER THAN STATUS"), UNPROCESSABLE)
-    );
-  }
-
   // FIND CONTACT AND UPADTE
-  const contact = await Update(ContactSchema, req.params.contactId, req.body);
+  const contact = await Update(ContactSchema, req.params.contactId, {
+    status: req.body.status
+  });
 
   // SEND RESPONSE
   res.status(SUCCESS).json({
