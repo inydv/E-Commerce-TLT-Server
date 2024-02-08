@@ -10,15 +10,15 @@ const ProductSchema = new Mongoose.Schema(
     name: {
       type: String,
       required: [true, "Please Enter Product Name"],
-      minlength: [20, "Name Should've More Than 20 Characaters"],
-      maxlength: [100, "Name Can't Exceed 100 Characters"],
+      // minlength: [20, "Name Should've More Than 20 Characaters"],
+      // maxlength: [100, "Name Can't Exceed 100 Characters"],
       trim: true,
     },
     description: {
       type: String,
       required: [true, "Please Enter Product Description"],
-      minlength: [50, "Description Should've More Than 50 Characaters"],
-      maxlength: [500, "Description Can't Exceed 500 Characters"],
+      // minlength: [50, "Description Should've More Than 50 Characaters"],
+      // maxlength: [500, "Description Can't Exceed 500 Characters"],
       trim: true,
     },
     images: [
@@ -80,14 +80,14 @@ const ProductSchema = new Mongoose.Schema(
 );
 
 // CUSTOM VALIDATION FOR PRICE
-ProductSchema.path("price").validate(function (Number) {
-  return NumberValidation(Number, 3, 5);
-}, "Price Should Between 3 To 5 Digits");
+// ProductSchema.path("price").validate(function (Number) {
+//   return NumberValidation(Number, 3, 5);
+// }, "Price Should Between 3 To 5 Digits");
 
 // CUSTOM VALIDATION FOR QUANTITY
-ProductSchema.path("quantity").validate(function (Number) {
-  return NumberValidation(Number, 1, 2);
-}, "Quantity Should Between 1 To 2 Digits");
+// ProductSchema.path("quantity").validate(function (Number) {
+//   return NumberValidation(Number, 1, 2);
+// }, "Quantity Should Between 1 To 2 Digits");
 
 // CUSTOM VALIDATION FOR RATINGS
 ProductSchema.path("ratings").validate(function (Number) {
