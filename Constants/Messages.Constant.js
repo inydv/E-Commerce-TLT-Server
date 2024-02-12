@@ -46,7 +46,7 @@ module.exports = {
 
   // EMAIL SUBJECT
   SUBJECT: {
-    VERIFICATION_ACCOUNT_1: `We're happy you signed up for The Little Things. To start exploring The Little Things,`,
+    VERIFICATION_ACCOUNT_1: `We're happy you signed up for Snappy Era. To start exploring Snappy Era,`,
     VERIFICATION_ACCOUNT_2:
       "Please verify your account by clicking the link below:",
     RESET_PASSWORD_1: `Opps!!!!! Look like you have forgot your password, But don't worry,`,
