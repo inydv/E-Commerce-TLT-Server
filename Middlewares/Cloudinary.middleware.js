@@ -7,8 +7,8 @@ const { INTERNAL_SERVER_ERROR } = require("../Constants/Status.Constant");
 
 // CLOUDINARY CONSTANT
 const CLOUDINARY_CONSTANT = {
-  width: 500,
-  height: 500,
+  width: 700,
+  height: 700,
   quality: "80",
   fetch_format: "avif",
   effect: "auto_contrast",
