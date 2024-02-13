@@ -9,7 +9,7 @@ const { INTERNAL_SERVER_ERROR } = require("../Constants/Status.Constant");
 const CLOUDINARY_CONSTANT = {
   width: 700,
   height: 700,
-  quality: "80",
+  quality: "100",
   fetch_format: "avif",
   effect: "auto_contrast",
   gravity: "auto",
